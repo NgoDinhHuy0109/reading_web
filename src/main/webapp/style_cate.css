@@ -1,0 +1,459 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+    --color-primary: #6C9BCF;
+    --color-danger: #FF0060;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+
+    /* styke cua minh */
+    --color-primary: #6C9BCF;
+    --pink: #FF99CC;
+    --color-danger: #e0ac1c;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --green: #54B192;
+    /* Moi khi nguoi dung re chuot qua elemetn se nhat di */
+    --green-l:#A4CEC0;
+    --gray: #3F3D56;
+    --Green: #009900;
+    --Red: #e0ac1c;
+    --orange: #fa5652;
+    --light-pink: #fff9f9;
+    --shadow: 0 20px 60px 0 rgba(226, 244, 115, 0.2);
+    --linear-gradient: linear-gradient(45deg, #f06, #3cf, #f06);
+    --smooth: all .3s ease-in;
+}
+
+.dark-mode-variables{
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    appearance: none;
+    border: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    background-color: var(--color-background);
+}
+a{
+    color: var(--color-dark);
+}
+
+img{
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+h2{
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+h3{
+    font-weight: 500;
+    font-size: 0.87rem;
+}
+
+small{
+    font-size: 0.76rem;
+}
+
+p{
+    color: var(--color-dark-variant);
+}
+
+b{
+    color: var(--color-dark);
+}
+
+.text-muted{
+    color: var(--color-info-dark);
+}
+
+.primary{
+    color: var(--color-primary);
+}
+
+.danger{
+    color: var(--color-danger);
+}
+
+.success{
+    color: var(--color-success);
+}
+
+.warning{
+    color: var(--color-warning);
+}
+
+.container{
+    display: grid;
+    width: 95%;
+    height: 100vh; /* phải đặt chiểu dài cố định cho div cha thì div cha mới tắt được thanh cuộn  */
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 12rem auto ;
+    overflow: hidden; /* Tắt thanh cuộn cho container */
+
+}
+
+aside{
+    height: 100vh;
+    width: 168px;
+}
+aside .toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
+}
+
+aside .toggle .logo{
+    display: flex;
+    gap: 0.5rem;
+}
+
+aside .toggle .logo img{
+    width: 2rem;
+    height: 2rem;
+}
+
+aside .toggle .close{
+    padding-right: 1rem;
+    display: none;
+}
+
+aside .sidebar{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    box-shadow: var(--box-shadow);
+    border-radius: 15px;
+    height: 88vh;
+    position: relative;
+    top: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar:hover{
+    box-shadow: none;
+}
+
+aside .sidebar a{
+    display: flex;
+    align-items: center;
+    color: var(--color-info-dark);
+    height: 3.7rem;
+    gap: 1rem;
+    position: relative;
+    margin-left: 2rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a span{
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a:last-child{
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+aside .sidebar a.active{
+    width: 100%;
+    color: var(--color-primary);
+    background-color: var(--color-light);
+    margin-left: 0;
+}
+
+aside .sidebar a.active::before{
+    content: '';
+    width: 6px;
+    height: 18px;
+    background-color: var(--color-primary);
+}
+
+aside .sidebar a.active span{
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar a:hover{
+    color: var(--color-primary);
+}
+
+aside .sidebar a:hover span{
+    margin-left: 0.6rem;
+}
+
+aside .sidebar .message-count{
+    background-color: var(--color-danger);
+    padding: 2px 6px;
+    color: var(--color-white);
+    font-size: 11px;
+    border-radius: var(--border-radius-1);
+}
+/* start phan main  */
+
+main{
+    margin-top: 1.4rem;
+    width: 100%;
+    height: auto;
+    overflow-y: auto; 
+    padding-bottom: 30px;
+    }
+/* start phan anh dai dien user */
+
+main .profile{
+    display: flex;
+    gap: 2rem;
+    text-align: right;
+    justify-content: flex-end;
+    margin-right: 15px;
+
+}
+
+main .profile .profile-photo{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+/* style phan bang */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* start style o input ......................*/
+.contact_form_cate label {
+    display: block;
+    margin-top: 10px; /* You can adjust this value to control the space between label and input */
+}
+.contact_form_cate input {
+    /* background-color: aqua; */
+    font-family: "Roboto",serif;
+    font-size: 1.375rem;
+    margin-top: 10px;
+    width: 100%;
+    height:54px;
+    padding: 15px 15px 15px 35px ;
+    border-radius: 200px;
+    box-shadow: var(--shadow);
+    border: #e0ac1c solid 2px;
+}
+#editor {
+    border: 1px solid #ccc;
+    width: 60%;
+    height: 160px;
+    font-size: 1.375rem;
+    margin-top: 10px;
+    padding: 15px 15px 15px 35px ;     /* Khoảng cách giữa đường viền và nội dung trong #editor */
+    overflow: auto; /* Thêm thanh cuộn khi nội dung vượt quá kích thước */
+    background-color: #fff; /* Màu nền */
+    border-radius: 20px; /* Bo tròn các góc */
+    box-shadow: var(--shadow);
+    border: #e0ac1c solid 2px;
+  }
+
+.contact_form_cate input:focus{
+    outline: none;
+}
+
+/* end style o input ......................*/
+
+label{
+    font-size: 18px;
+}
+
+/* style cac nut button */
+button{
+    text-align: center;
+    color: #fff;
+    background-color: var(--Green);
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+}
+button:hover{
+    background-color: #eccd77;
+    transition: var(--smooth);
+}
+
+.navbar_btn{
+    font-size: 1rem;
+    background-color: var(--Red);
+    margin-left: 45px;
+    width: 105px;
+    min-height: auto;
+}
+
+/* style nut create new */
+.btn_create{
+    font-size: 1rem;
+    background-color: var(--Red);
+    margin-left: 0px;
+    width: 130px;
+    height: 30px;
+}
+/* style nut back to list */
+.btn_backtolist{
+    font-size: 1rem;
+    background-color: var(--Red);
+    margin-left: 0px;
+    width: fit-content;
+    height: 30px;
+
+}
+/* style phan main category */
+
+main .analyse_cate{
+    display: flex;
+    flex-direction: column;
+}
+
+main .analyse_cate > div{
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+main .analyse_cate > div:hover{
+    box-shadow: none;
+}
+
+main .analyse_cate > div .status_cate{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .analyse_cate h2{
+    margin-left: 0.5rem;
+    font-size: 1.5rem;
+}
+/* end style phan main category */
+/* style button trong bang */
+.btn_table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.butoon_table{
+    text-align: center;
+    color: #fff;
+    background-color: var(--color-danger);
+    padding: .2rem 0.2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+    width: 60px;
+    height: 25px;
+    margin-top: 5px;
+    font-size: 13px;
+}
+.butoon_table:hover{
+    background-color: #eccd77;
+    transition: var(--smooth);
+}
+
+.entries {
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+
