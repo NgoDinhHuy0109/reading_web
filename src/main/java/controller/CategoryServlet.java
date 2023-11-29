@@ -1,18 +1,16 @@
 package controller;
 
 import models.CategoriesEntity;
+import DTO.*;
 import utils.Service.*;
-
-import java.io.IOException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import DTO.*;
 
 import java.util.List;
+import java.io.IOException;
 
 @WebServlet(name = "CategoryServlet", urlPatterns = {"/category"})
 public class CategoryServlet extends HttpServlet {
@@ -21,7 +19,6 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-
             String url = "/cate_home.jsp";
             String action = request.getParameter("action");
             if (action == null) {
@@ -30,7 +27,7 @@ public class CategoryServlet extends HttpServlet {
             if (action.equals("join")) {
                 url = "/cate_home.jsp";    // the "join" page
             }
-            if (action.equals("add") || action.equals("createNew")) {
+            if (action.equals("createNew")) {
                 String categoryName = request.getParameter("categoryName");
                 String description = request.getParameter("description");
                 CategoriesEntity categoriesEntity = new CategoriesEntity(categoryName, description);
@@ -43,6 +40,20 @@ public class CategoryServlet extends HttpServlet {
                     url = "/error_notification.jsp";
                     request.setAttribute("error", e.getMessage());
                 }
+            }
+            if (action.equals("back")){
+                try {
+                    List<CategoryDTO> categoriesList = categoryApplication.getAllCategories();
+                    // Set the categoriesList attribute before forwarding
+                    request.setAttribute("categoriesList", categoriesList);
+                    url = "/cate_home.jsp";
+                    // Forward to the JSP
+                }
+                catch (Exception e) {
+                    url = "/error_notification.jsp";
+                    request.setAttribute("error", e.getMessage());
+                }
+
             }
             // Retrieve the updated list of categories from the database
             List<CategoryDTO> categoriesList = categoryApplication.getAllCategories();
@@ -61,7 +72,6 @@ public class CategoryServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // Retrieve the updated list of categories from the database
             List<CategoryDTO> categoriesList = categoryApplication.getAllCategories();
             // Set the categoriesList attribute in the request
             request.setAttribute("categoriesList", categoriesList);

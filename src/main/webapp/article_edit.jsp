@@ -213,7 +213,7 @@
     <script src="https://unpkg.com/@xylphid/resizable/index.js"></script>
     <script src="script_article.js"></script>
 
-
+    </div>
 </body>
 
 </html>

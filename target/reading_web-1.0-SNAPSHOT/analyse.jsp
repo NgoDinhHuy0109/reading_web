@@ -12,7 +12,6 @@
 <body>
     <main>
         <h1>Analytics</h1>
-
         <div class="analyse">
             <div class="sales">
                 <div class="status">

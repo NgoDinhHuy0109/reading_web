@@ -6,7 +6,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import models.*;
 import java.util.UUID;
-
 public class HibernateUtils {
     private static final SessionFactory sessionFactory;
     protected Object object = null;
@@ -20,11 +19,9 @@ public class HibernateUtils {
             throw new ExceptionInInitializerError(ex);
         }
     }
-
     public HibernateUtils(Object object) {
         this.object = object;
     }
-
     public void saveEntity() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -35,8 +32,7 @@ public class HibernateUtils {
         session.getTransaction().commit();
         session.close();
     }
-
-    public <T> T    getEntityById(Class<T> entityType, UUID pk) {
+    public <T> T getEntityById(Class<T> entityType, UUID pk) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
         T entity = null;

@@ -423,22 +423,22 @@ main .analyse_cate h2{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 5px;
 }
-.butoon_table{
+.button_table{
     text-align: center;
     color: #fff;
-    background-color: var(--color-danger);
+    background-color: #eccd77;
     padding: .2rem 0.2rem;   /* tuy chinh kich thuoc cua vien button */
     border-radius: 100px;     /* bo tron nut button*/
     cursor: pointer;
     transition: var(--smooth);
-    width: 60px;
+    width: 100px;
     height: 25px;
-    margin-top: 5px;
     font-size: 13px;
 }
 .butoon_table:hover{
-    background-color: #eccd77;
+    background-color: var(--color-danger);
     transition: var(--smooth);
 }
 

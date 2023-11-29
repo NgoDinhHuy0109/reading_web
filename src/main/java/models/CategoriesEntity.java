@@ -18,7 +18,7 @@ public class CategoriesEntity implements Serializable{
     @Column(name = "categoryName", nullable = false, unique = true)
     private String categoryName;
     @Basic
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = false,columnDefinition = "TEXT")
     private String description;
     @Basic
     @Column(name = "createdAt", nullable = false)
@@ -81,9 +81,7 @@ public class CategoriesEntity implements Serializable{
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-
         CategoriesEntity that = (CategoriesEntity) object;
-
         if (!Objects.equals(categoryId, that.categoryId)) return false;
         if (categoryName != null ? !categoryName.equals(that.categoryName) : that.categoryName != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
@@ -100,11 +98,9 @@ public class CategoriesEntity implements Serializable{
     public Collection<ArticlesEntity> getProductsByCategoryId() {
         return listArticle;
     }
-
     public void setProductsByCategoryId(Collection<ArticlesEntity> productsByCategoryId) {
         this.listArticle = productsByCategoryId;
     }
-
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy H:mm:ss");

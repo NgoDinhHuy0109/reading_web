@@ -24,7 +24,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <!-- Sidebar Section -->
         <aside>
@@ -205,6 +204,7 @@
 
     <script src="orders.js"></script>
     <script src="script_article.js"></script>
+    </div>
 </body>
 
 </html>
