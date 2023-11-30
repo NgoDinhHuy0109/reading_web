@@ -27,31 +27,31 @@
             </div>
         </div>
         <div class="sidebar">
-            <a href="analyse.html" target="Loadpage">
+            <a href="dashboard.jsp">
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="cate_home.jsp" target="Loadpage">
+            <a href="category">
                     <span class="material-icons-sharp">
                         receipt_long
                     </span>
                 <h3>Category</h3>
             </a>
-            <a href="article_home.jsp" target="Loadpage">
+            <a href="article_home.jsp">
                     <span class="material-icons-sharp">
                         insights
                     </span>
                 <h3>Article</h3>
             </a>
-            <a href="user.html" target="Loadpage">
+            <a href="user.html">
                     <span class="material-icons-sharp">
                         person_outline
                     </span>
                 <h3>User</h3>
             </a>
-            <a href="index_category.html" target="Loadpage">
+            <a href="index_category.html">
                     <span class="material-icons-sharp">
                         inventory
                     </span>

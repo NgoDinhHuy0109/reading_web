@@ -86,6 +86,15 @@
                 System.out.println("Error deleting category: " + error);
             }
         }
+        public CategoriesEntity getCategoryById(UUID categoryId) {
+            try {
+                // Retrieve the category by its ID
+                return (CategoriesEntity) getEntityById(CategoriesEntity.class, categoryId);
+            } catch (Exception error) {
+                System.out.println("Error retrieving category by ID: " + error);
+                return null; // Return null in case of an error
+            }
+        }
         public List<CategoryDTO> getAllCategories() {
             try {
                 // Query the database to get all categories

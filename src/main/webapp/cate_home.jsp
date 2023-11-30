@@ -29,25 +29,25 @@
             </div>
         </div>
         <div class="sidebar">
-            <a href="analyse.jsp" target="Loadpage">
+            <a href="dashboard.jsp" >
                     <span class="material-icons-sharp">
                         dashboard
                     </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="cate_home.jsp" target="Loadpage">
+            <a href="category" >
                     <span class="material-icons-sharp">
                         receipt_long
                     </span>
                 <h3>Category</h3>
             </a>
-            <a href="article_home.jsp" target="Loadpage">
+            <a href="article_home.jsp" >
                     <span class="material-icons-sharp">
                         insights
                     </span>
                 <h3>Article</h3>
             </a>
-            <a href="user.jsp" target="Loadpage">
+            <a href="user.jsp" >
                     <span class="material-icons-sharp">
                         person_outline
                     </span>
@@ -112,22 +112,20 @@
                     </tr>
                     <% for (CategoryDTO category : categoriesList) { %>
                     <tr>
-                        <td><%= category.getCategory().getCategoryName() %>
-                        </td>
-                        <td><%= category.getCategory().getDescription() %>
-                        </td>
-                        <td><%= category.getCreatedAtString() %>
-                        </td>
-                        <td><%= category.getUpdatedAtString() %>
-                        </td>
+                        <td><%= category.getCategory().getCategoryName() %></td>
+                        <td><%= category.getCategory().getDescription() %></td>
+                        <td><%= category.getCreatedAtString() %></td>
+                        <td><%= category.getUpdatedAtString() %></td>
                         <td>
                             <div class="btn_table">
                                 <a href="cate_edit.jsp?categoryId=<%= category.getCategory().getCategoryId() %>">
                                     <button class="button_table" type="button" id="edit"> Edit</button>
                                 </a>
-                                <a href="delete_category.jsp">
-                                    <button class="button_table" type="button" id="delete"> Delete</button>
-                                </a>
+                                <form action="category" method="post">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="categoryId" value="<%= category.getCategory().getCategoryId() %>">
+                                    <button class="button_table" type="submit" id="delete"> Delete</button>
+                                </form>
                             </div>
                         </td>
                     </tr>
