@@ -41,42 +41,38 @@ public class UserInfoEntity implements Serializable{
     @OneToOne
     @JoinColumn(name = "account_id", nullable = false)
     private AccountsEntity accountsEntity;
-
-    public UserInfoEntity() {
+    public UserInfoEntity() {}
+    public UserInfoEntity(String fullName, Long dateofBirth, String email, String phoneNumber) {
+        this.userInfoId = UUID.randomUUID();
+        this.fullName = fullName;
+        this.dateofBirth =dateofBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
-
     public UUID getUserInfoId() {
         return userInfoId;
     }
-
     public void setUserInfoId(UUID userInfoId) {
         this.userInfoId = userInfoId;
     }
-
     public Long getDateofBirth() {
         return dateofBirth;
     }
-
     public void setDateofBirth(Long dateofBirth) {
         this.dateofBirth = dateofBirth;
     }
-
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
     public Long getCreatedAt() {
         return createdAt;
     }
@@ -159,4 +155,11 @@ public class UserInfoEntity implements Serializable{
                 '}';
     }
 
+    public void setAccountsEntity(AccountsEntity accountsEntity) {
+        this.accountsEntity = accountsEntity;
+    }
+
+    public AccountsEntity getAccountsEntity() {
+        return accountsEntity;
+    }
 }

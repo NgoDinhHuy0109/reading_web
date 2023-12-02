@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,23 +9,25 @@
 </head>
 <body>
     <div class="box">
-        <form>
+        <form action="SignInn" method="post">
+            <input type="hidden" name="action" value="SignIn">
             <h2>Sign in</h2>
             <div class="inputBox">
-                <input type="text" required>
+                <input type="text" name="userName" required>
                 <span>Username</span>
                 <i></i>
             </div>
             <div class="inputBox">
-                <input type="password" required>
+                <input type="password" name="password" required>
                 <span>Password</span>
                 <i></i>
             </div>
+
             <div class="links">
                 <a href="#">Forgot Password</a>
                 <a href="sign_up.jsp">Sign Up</a>
             </div>
-            <input type="submit" value="Login">
+            <input type="submit" id="signin" value="Login">
         </form>
     </div>
 </body>
