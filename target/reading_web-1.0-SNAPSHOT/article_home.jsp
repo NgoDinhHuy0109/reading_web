@@ -46,7 +46,7 @@
                     </span>
                 <h3>Dashboard</h3>
             </a>
-            <a href="cate_home.jsp" target="Loadpage">
+            <a href="category" target="Loadpage">
                     <span class="material-icons-sharp">
                         receipt_long
                     </span>
