@@ -54,6 +54,7 @@ public class SignInServlet extends HttpServlet {
                             {
                                 url="/dashboard.jsp";
                                 List<UserDTO> userDTOList = userApplication.getUsersByAccountName(userName);
+                                request.setAttribute("userList", userDTOList);
                             }
                             else
                             {

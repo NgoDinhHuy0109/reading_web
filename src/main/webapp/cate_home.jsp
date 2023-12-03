@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="DTO.UserDTO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ page import="utils.Service.Category" %>
 <%@ page import="models.CategoriesEntity" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -75,10 +77,13 @@
     </aside>
     <main>
         <div class="profile">
+            <% List<UserDTO> userList = (List<UserDTO>) request.getAttribute("userList"); %>
+            <% for (UserDTO user : userList) { %>
             <div class="info">
-                <p>Hey, <b>User</b></p>
+                <p>Hey, <b><%= user.getUserInfo().getFullName() %></b></p>
                 <small class="text-muted">Admin</small>
             </div>
+            <% } %>
             <div class="profile-photo">
                 <img src="images/profile-1.jpg">
             </div>

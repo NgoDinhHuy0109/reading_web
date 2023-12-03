@@ -55,6 +55,12 @@ public class UserInfoEntity implements Serializable{
     public void setUserInfoId(UUID userInfoId) {
         this.userInfoId = userInfoId;
     }
+    public String getFullName() {
+        return fullName;
+    }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
     public Long getDateofBirth() {
         return dateofBirth;
     }
