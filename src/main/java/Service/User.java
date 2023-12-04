@@ -1,4 +1,4 @@
-package utils.Service;
+package Service;
 
 import DTO.UserDTO;
 import com.google.gson.Gson;
@@ -92,5 +92,4 @@ public class   User extends HibernateUtils {
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
-
 }

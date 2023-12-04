@@ -1,14 +1,13 @@
 package controller;
 
+import Service.Category;
 import models.CategoriesEntity;
 import DTO.*;
-import utils.Service.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.util.List;
 import java.io.IOException;
 import java.util.UUID;
@@ -32,6 +31,14 @@ public class CategoryServlet extends HttpServlet {
                 String categoryName = request.getParameter("categoryName");
                 String description = request.getParameter("description");
                 CategoriesEntity categoriesEntity = new CategoriesEntity(categoryName, description);
+                if (categoryApplication.isCategoryExists(categoryName)) {
+                    // Handle case where email already exists
+                    url = "/cate_create.jsp";
+                    request.setAttribute("error", "Category already exists");
+                    getServletContext().getRequestDispatcher(url).forward(request, response);
+                    //
+                    //return;
+                }
                 try {
                     categoryApplication.createCategory(categoriesEntity);
                     // Redirect to cate_home.jsp after creating the category
@@ -97,7 +104,6 @@ public class CategoryServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
         }
     }
-
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)

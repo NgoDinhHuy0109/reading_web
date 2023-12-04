@@ -15,7 +15,7 @@ public class CategoriesEntity implements Serializable{
     @Column(name = "category_id",columnDefinition = "uuid")
     private UUID categoryId;
     @Basic
-    @Column(name = "categoryName", nullable = false, unique = true)
+    @Column(name = "categoryName", nullable = false)
     private String categoryName;
     @Basic
     @Column(name = "description", nullable = false,columnDefinition = "TEXT")
@@ -76,20 +76,6 @@ public class CategoriesEntity implements Serializable{
         this.updatedAt = updatedAt;
         this.isDeleted = isDeleted;
         this.listArticle = listArticle;
-    }
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        CategoriesEntity that = (CategoriesEntity) object;
-        if (!Objects.equals(categoryId, that.categoryId)) return false;
-        if (categoryName != null ? !categoryName.equals(that.categoryName) : that.categoryName != null) return false;
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
-        if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) return false;
-        if (isDeleted != null ? !isDeleted.equals(that.isDeleted) : that.isDeleted != null) return false;
-
-        return true;
     }
     @Override
     public int hashCode() {

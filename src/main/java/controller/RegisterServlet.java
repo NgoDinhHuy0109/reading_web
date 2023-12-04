@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.AccountsEntity;
 import models.UserInfoEntity;
-import utils.Service.Account;
-import utils.Service.User;
+import Service.Account;
+import Service.User;
 
 import java.io.IOException;
 
@@ -16,6 +16,7 @@ import java.io.IOException;
 public class RegisterServlet extends HttpServlet {
     private final Account accountApplication = new Account(new AccountsEntity());
     private final User userApplication = new User(new UserInfoEntity());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -69,7 +70,6 @@ public class RegisterServlet extends HttpServlet {
                     // Create user information
                     userApplication.createUsers(userInfosEntity, accountsEntity.getAccountId());
                     url = "/sign_in.jsp";
-                    response.sendRedirect(request.getContextPath() + "/register?action=join");
                     getServletContext().getRequestDispatcher(url).forward(request, response);
                     return;
                 } catch (Exception e) {
@@ -83,6 +83,7 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)

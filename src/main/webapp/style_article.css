@@ -11,16 +11,12 @@
     --color-light: rgba(132, 139, 200, 0.18);
     --color-dark-variant: #677483;
     --color-background: #f6f6f9;
-
     --card-border-radius: 2rem;
     --border-radius-1: 0.4rem;
     --border-radius-2: 1.2rem;
-
     --card-padding: 1.8rem;
     --padding-1: 1.2rem;
-
     --box-shadow: 0 2rem 3rem var(--color-light);
-
     /* styke cua minh */
     --color-primary: #6C9BCF;
     --pink: #FF99CC;
@@ -105,18 +101,14 @@ h1{
 
 h2{
     font-weight: 600;
-    font-size: 1.4rem;
 }
-
 h3{
     font-weight: 500;
     font-size: 0.87rem;
 }
-
 small{
     font-size: 0.76rem;
 }
-
 p{
     color: var(--color-dark-variant);
 }
@@ -147,16 +139,18 @@ b{
 
 .container{
     display: grid;
-    width: 96%;
+    width: 95%;
+    height: 100vh; /* phải đặt chiểu dài cố định cho div cha thì div cha mới tắt được thanh cuộn  */
     margin: 0 auto;
     gap: 1.8rem;
     grid-template-columns: 12rem auto ;
+    overflow: hidden; /* Tắt thanh cuộn cho container */
 }
 
 aside{
     height: 100vh;
+    width: 170px;
 }
-
 aside .toggle{
     display: flex;
     align-items: center;
@@ -256,7 +250,9 @@ aside .sidebar .message-count{
 main{
     margin-top: 1.4rem;
     width: 100%;
-    height: 100vh;
+    height: auto;
+    overflow-y: auto;
+    padding-bottom: 30px;
 }
 
 /* start phan anh dai dien user */
@@ -267,8 +263,9 @@ main .profile{
     text-align: right;
     justify-content: flex-end;
     margin-right: 15px;
-
 }
+
+
 
 main .profile .profile-photo{
     width: 2.8rem;
@@ -340,12 +337,6 @@ button:hover{
     margin-left: 45px;
     width: 105px;
     min-height: auto;
-    text-align: center;
-    color: #fff;
-    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
-    border-radius: 100px;     /* bo tron nut button*/
-    cursor: pointer;
-    transition: var(--smooth);
 }
 
 /* style nut create new */
@@ -355,13 +346,6 @@ button:hover{
     margin-left: 0px;
     width: 130px;
     height: 30px;
-    text-align: center;
-    color: #fff;
-
-    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
-    border-radius: 100px;     /* bo tron nut button*/
-    cursor: pointer;
-    transition: var(--smooth);
 }
 /* style nut back to list */
 .btn_backtolist{
@@ -370,13 +354,6 @@ button:hover{
     margin-left: 0px;
     width: fit-content;
     height: 30px;
-    text-align: center;
-    color: #fff;
-
-    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
-    border-radius: 100px;     /* bo tron nut button*/
-    cursor: pointer;
-    transition: var(--smooth);
 
 }
 /* style phan main article */
@@ -417,22 +394,21 @@ main .analyse_article h2{
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 5px;
 }
-.butoon_table{
+.button_table{
     text-align: center;
     color: #fff;
-    background-color: var(--color-danger);
+    background-color: #eccd77;
     padding: .2rem 0.2rem;   /* tuy chinh kich thuoc cua vien button */
     border-radius: 100px;     /* bo tron nut button*/
     cursor: pointer;
     transition: var(--smooth);
-    width: 60px;
+    width: 100px;
     height: 25px;
-    margin-top: 5px;
     font-size: 13px;
-    
 }
-.butoon_table:hover{
+.button_table:hover{
     background-color: #eccd77;
     transition: var(--smooth);
 }

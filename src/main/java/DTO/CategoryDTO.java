@@ -1,7 +1,7 @@
 package DTO;
 import java.text.SimpleDateFormat;
 import models.CategoriesEntity;
-import utils.Service.Category;
+
 public class CategoryDTO {
 
     private final CategoriesEntity category;

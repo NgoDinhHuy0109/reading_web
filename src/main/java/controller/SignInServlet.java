@@ -1,29 +1,36 @@
 package controller;
 
 import DTO.UserDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import common_string.RoleString;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import models.AccountsEntity;
 import models.UserInfoEntity;
-import utils.Service.Account;
-import utils.Service.User;
+import objects.AccountCookieObjects;
+import Service.Account;
+import Service.User;
+import utils.cookie.CookieUtils;
 
-import java.awt.datatransfer.DataFlavor;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+
 
 @WebServlet(name = "SignInServlet", urlPatterns = {"/SignInn"})
 public class SignInServlet extends HttpServlet {
     private final Account accountApplication = new Account(new AccountsEntity());
     private final User userApplication = new User(new UserInfoEntity());
     AccountsEntity accounts = new AccountsEntity();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try{
+        try {
             String url = "/sign_in.jsp";
             String action = request.getParameter("action");
             if (action == null) {
@@ -36,32 +43,50 @@ public class SignInServlet extends HttpServlet {
                 // Retrieve user inputs
                 String userName = request.getParameter("userName");
                 String password = request.getParameter("password");
-
+                HttpSession session = request.getSession();
                 try {
-                    accounts=accountApplication.getAccount(userName);
-                    if(Objects.equals(accounts, null))
-                    {
+                    accounts = accountApplication.getAccount(userName);
+                    if (Objects.equals(accounts, null)) {
                         url = "/sign_in_error.jsp";
                         request.setAttribute("error", "Wrong Username or password");
                         getServletContext().getRequestDispatcher(url).forward(request, response);
                         return;
                     }
-                    if(Objects.equals(accounts.getUserName(), userName))
-                    {
-                        if(Objects.equals(accounts.getPassword(), password))
-                        {
-                            if(accounts.getAdmin()==Boolean.TRUE)
+                    if (Objects.equals(accounts.getUserName(), userName)) {
+                        if (Objects.equals(accounts.getPassword(), password)) {
+                            AccountCookieObjects accountCookieObjects = AccountCookieObjects.builder()
+                                    .accountId(accounts.getAccountId())
+                                    .role(accounts.getRole())
+                                    .build();
+                            ObjectMapper objectMapper = new ObjectMapper();
+                            String json = objectMapper.writeValueAsString(accountCookieObjects);
+                            CookieUtils cookieUtils = new CookieUtils();
+                            Boolean setCookieSuccess = cookieUtils.setCookie(response, request, json, "accounts");
+                            if(!setCookieSuccess)
                             {
-                                url="/dashboard.jsp";
-                                List<UserDTO> userDTOList = userApplication.getUsersByAccountName(userName);
-                                request.setAttribute("userList", userDTOList);
+                                url = "/sign_in_error.jsp";
+                                request.setAttribute("error", "Can not get");
+                                getServletContext().getRequestDispatcher(url).forward(request, response);
+
                             }
-                            else
+                            //check role
+                            if(RoleString.admin.equals(accounts.getRole()))
                             {
-                                url="/news_page/index.jsp";
+                                List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
+                                for (UserDTO user : userList)
+                                {
+                                    session.setAttribute("username", user.getUserInfo().getFullName());
+                                }
+                                url = "/dashboard.jsp";
                             }
-                        }
-                        else {
+                            if(RoleString.reader.equals(accounts.getRole()))
+                            {
+                                List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
+                                session.setAttribute("UserInformation", userList);
+                                url = "/images/index_user.jsp";
+                            }
+
+                        } else {
                             url = "/sign_in_error.jsp";
                             request.setAttribute("error", "Wrong Username or password");
                             getServletContext().getRequestDispatcher(url).forward(request, response);
@@ -82,6 +107,7 @@ public class SignInServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
         }
     }
+
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)

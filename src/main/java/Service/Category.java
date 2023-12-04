@@ -1,18 +1,14 @@
-    package utils.Service;
+    package Service;
 
     import com.google.gson.Gson;
     import models.AccountsEntity;
-    import models.ArticlesEntity;
     import models.CategoriesEntity;
     import org.hibernate.Session;
     import utils.HibernateUtils;
-    import java.text.SimpleDateFormat;
-    import java.util.ArrayList;
-    import java.util.Collection;
+
     import java.util.Collections;
     import java.util.List;
-    import org.hibernate.Session;
-    import org.hibernate.SessionFactory;
+
     import org.hibernate.query.Query;
     import java.util.UUID;
     import java.util.stream.Collectors;
@@ -107,6 +103,15 @@
                 return Collections.emptyList(); // Return an empty list in case of an error
             }
         }
+        public boolean isCategoryExists(String categoryName) {
+            try {
+                String query = "FROM CategoriesEntity WHERE isDeleted = false AND categoryName = :categoryName";
+                return !executeQueryWithParameter(query, "categoryName", categoryName).isEmpty();
+            } catch (Exception e) {
+                // Log the error using a logging framework
+                throw new RuntimeException("Error checking account existence", e);
+            }
+        }
         // Execute an HQL query and return the result list
         private List<CategoriesEntity> executeQuery(String query) {
             try (Session session = getSessionFactory().openSession()) {
@@ -116,7 +121,18 @@
                 System.out.println("Error executing query: " + e);
                 return Collections.emptyList(); // Return an empty list in case of an error
             }
+        }
+
+        private List<AccountsEntity> executeQueryWithParameter(String query, String paramName, String paramValue) {
+            try (Session session = getSessionFactory().openSession()) {
+                Query<AccountsEntity> hqlQuery = session.createQuery(query, AccountsEntity.class);
+                hqlQuery.setParameter(paramName, paramValue);
+                return hqlQuery.getResultList();
+            } catch (Exception e) {
+                System.out.println("Error retrieving categories: " + e);
+                throw new RuntimeException("Error executing query", e);
             }
+        }
         private List<CategoryDTO> formatDateTimeInCategories(List<CategoriesEntity> categories) {
             return categories.stream()
                     .map(CategoryDTO::new)

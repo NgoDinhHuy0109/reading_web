@@ -1,7 +1,6 @@
 <%@ page import="DTO.UserDTO" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ page import="utils.Service.Category" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="Service.Category" %>
 <%@ page import="models.CategoriesEntity" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
@@ -18,76 +17,9 @@
 </head>
 <body>
 <div class="container">
-    <aside>
-        <div class="toggle">
-            <div class="logo">
-                <img src="images/logo.png">
-                <a href="index_cate.html"><h2 class="h2_header">Admin<span class="danger">Page</span></h2></a>
-            </div>
-            <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">
-                        close
-                    </span>
-            </div>
-        </div>
-        <div class="sidebar">
-            <a href="dashboard.jsp" >
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                <h3>Dashboard</h3>
-            </a>
-            <a href="category">
-                    <span class="material-icons-sharp">
-                        receipt_long
-                    </span>
-                <h3>Category</h3>
-            </a>
-            <a href="article_home.jsp">
-                    <span class="material-icons-sharp">
-                        insights
-                    </span>
-                <h3>Article</h3>
-            </a>
-            <a href="user.html">
-                    <span class="material-icons-sharp">
-                        person_outline
-                    </span>
-                <h3>User</h3>
-            </a>
-            <a href="index_category.html">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                <h3>Interact</h3>
-            </a>
-            <a href="" >
-                    <span class="material-icons-sharp">
-                        add
-                    </span>
-                <h3>Create New</h3>
-            </a>
-            <a href="sign_in.jsp" >
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                <h3>Logout</h3>
-            </a>
-        </div>
-    </aside>
+    <jsp:include page="aside.jsp"/>
     <main>
-        <div class="profile">
-            <% List<UserDTO> userList = (List<UserDTO>) request.getAttribute("userList"); %>
-            <% for (UserDTO user : userList) { %>
-            <div class="info">
-                <p>Hey, <b><%= user.getUserInfo().getFullName() %></b></p>
-                <small class="text-muted">Admin</small>
-            </div>
-            <% } %>
-            <div class="profile-photo">
-                <img src="images/profile-1.jpg">
-            </div>
-        </div>
+        <<jsp:include page="profile.jsp"/>
         <h1>Category</h1>
         <%
             String categoryIdParam = request.getParameter("categoryId");

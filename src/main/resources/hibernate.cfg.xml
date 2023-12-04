@@ -8,9 +8,9 @@
         <!--    <property name="connection.driver_class"/>-->
         <!-- Database connection properties -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://dpg-clctc13mot1c73dj3adg-a.singapore-postgres.render.com/newsreading</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://dpg-clm3nlkjtl8s73erm5bg-a.singapore-postgres.render.com/newsreading_496q</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">nY6jZsUBVbFraesoDMHbZv4AnsHT05dJ</property>
+        <property name="hibernate.connection.password">Uelx1kDrJeRzQRG68fPi70JkkpRdlz2V</property>
         <!-- JDBC connection pool settings -->
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
@@ -31,5 +31,6 @@
         <mapping class="models.CommentsEntity"/>
         <mapping class="models.EmotionsEntity"/>
         <mapping class="models.InteractionsEntity"/>
+        <mapping class="models.RequestsEntity"/>
     </session-factory>
 </hibernate-configuration>

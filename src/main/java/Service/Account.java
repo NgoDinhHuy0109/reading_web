@@ -1,12 +1,11 @@
-package utils.Service;
-
+package Service;
 import DTO.AccountDTO;
 import com.google.gson.Gson;
+import common_string.RoleString;
 import models.AccountsEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import utils.HibernateUtils;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,12 +33,11 @@ public class Account extends HibernateUtils {
             newAcc.setAccountId(newAccId);
 
             Long current = System.currentTimeMillis();
+            newAcc.setRole(RoleString.reader);
             newAcc.setCreatedAt(current);
             newAcc.setUpdatedAt(current);
             newAcc.setDeleted(false);
-            if (newAcc.getAdmin() == null) {
-                newAcc.setAdmin(false);
-            }
+
             Account account = new Account(newAcc);
             account.save();
         } catch (Exception error) {

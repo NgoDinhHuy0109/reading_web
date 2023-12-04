@@ -1,5 +1,6 @@
 package models;
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import java.io.Serializable;
@@ -13,31 +14,43 @@ import java.util.UUID;
 @Entity
 @Table(name = "userinfos", schema = "public", catalog = "backend-servlet")
 public class UserInfoEntity implements Serializable{
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "userInfo_id",columnDefinition = "uuid")
     private UUID userInfoId;
+    @Getter
     @Basic
     @Column(name = "fullName", nullable = false)
     private String fullName;
+    @Getter
     @Basic
     @Column(name = "dateofBirth", nullable = false)
     private Long dateofBirth;
+    @Getter
     @Basic
     @Column(name = "email", nullable = false)
     private String email;
+    @Getter
     @Basic
     @Column(name = "phoneNumber", nullable = false)
     private String phoneNumber;
+    @Getter
+    @Basic
+    @Column(name = "userImage")
+    private String userImage;
+    @Getter
     @Basic
     @Column(name = "createdAt", nullable = false)
     private Long createdAt;
+    @Getter
     @Basic
     @Column(name = "updatedAt", nullable = false)
     private Long updatedAt;
     @Basic
     @Column(name = "isDeleted", nullable = false)
     private Boolean isDeleted;
+    @Getter
     @OneToOne
     @JoinColumn(name = "account_id", nullable = false)
     private AccountsEntity accountsEntity;
@@ -49,46 +62,33 @@ public class UserInfoEntity implements Serializable{
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
-    public UUID getUserInfoId() {
-        return userInfoId;
-    }
+
     public void setUserInfoId(UUID userInfoId) {
         this.userInfoId = userInfoId;
     }
-    public String getFullName() {
-        return fullName;
-    }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-    public Long getDateofBirth() {
-        return dateofBirth;
-    }
+
     public void setDateofBirth(Long dateofBirth) {
         this.dateofBirth = dateofBirth;
     }
-    public String getEmail() {
-        return email;
-    }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public Long getCreatedAt() {
-        return createdAt;
+
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Long getUpdatedAt() {
-        return updatedAt;
     }
 
     public void setUpdatedAt(Long updatedAt) {
@@ -165,7 +165,4 @@ public class UserInfoEntity implements Serializable{
         this.accountsEntity = accountsEntity;
     }
 
-    public AccountsEntity getAccountsEntity() {
-        return accountsEntity;
-    }
 }

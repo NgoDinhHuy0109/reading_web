@@ -1,5 +1,6 @@
 package models;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -20,9 +21,6 @@ public class  AccountsEntity implements Serializable  {
     @Column(name = "password",nullable = false)
     private String password;
     @Basic
-    @Column(name = "isAdmin", nullable = false)
-    private Boolean isAdmin;
-    @Basic
     @Column(name = "createdAt", nullable = false)
     private Long createdAt;
     @Basic
@@ -31,12 +29,24 @@ public class  AccountsEntity implements Serializable  {
     @Basic
     @Column(name = "isDeleted", nullable = false)
     private Boolean isDeleted;
+    @Getter
+    @Basic
+    @Column(name = "role", nullable = false)
+    private String role;
     @OneToOne(mappedBy = "accountsEntity")
     private UserInfoEntity userInfoEntity;
+    @Getter
     @OneToMany(mappedBy = "account")
     private Collection<ArticlesEntity> listArticle;
-    public AccountsEntity(){}
+    @Getter
+    @OneToOne(mappedBy = "accountRequest")
+    private RequestsEntity requestsEntity;
     public AccountsEntity(String userName){this.userName = userName;}
+
+    public AccountsEntity() {
+
+    }
+
     public UUID getAccountId() {
         return accountId;
     }
@@ -54,12 +64,6 @@ public class  AccountsEntity implements Serializable  {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-    public void setAdmin(Boolean admin) {
-        isAdmin = admin;
     }
     public Long getCreatedAt() {
         return createdAt;
@@ -79,6 +83,11 @@ public class  AccountsEntity implements Serializable  {
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public AccountsEntity(String userName, String password) {
         this.accountId = UUID.randomUUID();
         this.userName = userName;
@@ -103,9 +112,7 @@ public class  AccountsEntity implements Serializable  {
     public int hashCode() {
         return Objects.hash(accountId,userName,password, createdAt, updatedAt, isDeleted);
     }
-    public Collection<ArticlesEntity> getListArticle() {
-        return listArticle;
-    }
+
     public void setListArticle(Collection<ArticlesEntity> listArticle) {
         this.listArticle = listArticle;
     }
@@ -115,12 +122,13 @@ public class  AccountsEntity implements Serializable  {
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy H:mm:ss");
         return "AccountsEntity{" +
-                "categoryId=" + accountId +
+                "AccountId=" + accountId +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", createdAt='" + (createdAt != null ? dateFormat.format(createdAt) : null) + '\'' +
                 ", updatedAt='" + (updatedAt != null ? dateFormat.format(updatedAt) : null) + '\'' +
                 ", isDeleted='" + isDeleted + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
