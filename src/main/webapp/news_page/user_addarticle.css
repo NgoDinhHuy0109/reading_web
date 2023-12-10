@@ -1,0 +1,951 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --light: #f6f6f9;
+    --primary: #1976D2;
+    --light-primary: #CFE8FF;
+    --grey: #eee;
+    --dark-grey: #AAAAAA;
+    --dark: #363949;
+    
+	--light-danger: #FECDD3;
+    --warning: #FBC02D;
+    --light-warning: #FFF2C6;
+    --success: #388E3C;
+    --light-success: #BBF7D0;
+    /* ............. */
+    --color-primary: #6C9BCF;
+    --pink: #FF99CC;
+    --color-danger: #FF0060;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --green: #54B192;
+    /* Moi khi nguoi dung re chuot qua elemetn se nhat di */
+    --green-l:#A4CEC0;
+    --gray: #3F3D56;
+    --Green: #009900;
+    --Red: #FF0000;
+    --orange: #fa5652;
+    --light-pink: #fff9f9;
+    --shadow: 0 20px 60px 0 #eee4c4;
+    --linear-gradient: linear-gradient(45deg, #f06, #3cf, #f06);
+    --smooth: all .3s ease-in;
+}
+
+.dark-mode-variables{
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+   
+    border: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Roboto",serif;
+    
+}
+
+html{
+    font-size: 14px;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    user-select: none;
+    overflow-x: hidden;
+    color: var(--color-dark);
+    background-color: var(--color-background);
+}
+
+a{
+    color: var(--color-dark);
+}
+
+img{
+    display: block;
+    width: 100%;
+    object-fit: cover;
+}
+
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+    margin-top: 45px;
+}
+
+h2{
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+h3{
+    font-weight: 500;
+    font-size: 0.87rem;
+}
+/* style cac nut button */
+button{
+    text-align: center;
+    color: #fff;
+    background-color: var(--Green);
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+}
+button:hover{
+    background-color: #eccd77;
+    transition: var(--smooth);
+}
+
+
+/* start phan main  */
+
+
+/* start style cac phan tu tren thanh header mau ten cua page */
+
+.header {
+    position: fixed; /* Đặt tiêu đề ở vị trí cố định */
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%; /* Chiều rộng 100% */
+    background-color: #fff; /* Màu nền của tiêu đề */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng đổ */
+    z-index: 2; /* Độ sâu z-index để đảm bảo nó hiển thị trên các phần khác */
+    
+}
+.logo-name{
+    display: flex;
+    align-items: baseline;
+
+}
+.header .logo{ /* bao gom : lo go; ten page */
+    font-size: 24px;
+    font-weight: 700;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    color: var(--primary);
+    z-index: 500;
+    padding-bottom: 20px;
+    box-sizing:border-box;
+    margin-left: 10px; 
+}
+
+.header .logo img{
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-right: 10px;  
+    border-radius: 100%;
+}
+
+.header .logo .logo-name span.hch{
+    font-family: sans-serif;
+    color: #e0ac1c;
+    font-size: 25px;
+    margin-left: 5px;
+
+}
+.header .logo .logo-name span{
+   
+    color: #ffffff;
+    font: normal 50px 'Cookie', cursive;
+}
+.header .logo .bx{
+    min-width: 60px;
+    display: flex;
+    justify-header: center;
+    font-size: 2.2rem;
+}
+/* start header kich thuoc vung header*/
+.header nav{
+   
+    height: 66px;
+    background: #2d2a30;
+    padding: 5.5px 24px 0 0;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+.logo{
+    padding-top: 10px;
+
+}
+
+.header nav::before{
+    header: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: -40px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -20px -20px 0 var(--light);
+}
+
+.header nav a{
+    color: var(--dark);
+}
+
+.header nav .bx.bx-menu{
+    cursor: pointer;
+    color: var(--color-danger);
+}
+
+.header nav form{
+    max-width: 400px;
+    width: 100%;
+    margin-right: auto;
+}
+
+.header nav form .form-input{
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.header nav form .form-input input{
+    flex-grow: 1;
+    padding: 0 16px;
+    height: 100%;
+    border: none;
+    background: var(--grey);
+    border-radius: 36px 0 0 36px;
+    outline: none;
+    width: 100%;
+    color: var(--dark);
+}
+
+.header nav form .form-input button{ /* phan tim kiem mau hong */
+    padding-left: 1rem;
+    width: 70px;
+    height: 100%;
+    display: flex;
+    justify-header: center;
+    align-items: center;
+    background: #d5d1d1;
+    color: #151313;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 0 36px 36px 0;
+    cursor: pointer;
+}
+.header nav .profile img{
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+ /* phan menu so xuong tu user */
+.sub_menu_wrap{
+  position: absolute;
+  top: 100%;  
+  right: 1%;
+  width: 320px;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
+  z-index: 1;
+  width: 200px;
+  
+}
+/* mo menu  */
+.sub_menu_wrap.open_menu{
+    max-height: 400px;
+}
+/* day la o mo xuong tu user */
+.sub_menu{
+    background: #d5d1d1;
+    padding: 25px; /*khoang cach le hai ben so voi cai canh bang*/
+    margin: 5px;
+    border-radius: 10px;
+   
+}
+.user_info{
+    display: flex;
+    align-items: center;
+    color:var(--color-dark);
+}
+.user_info h2 {
+    color:var(--color-dark);
+}
+
+.user_info h3 {
+    font-weight: 500;
+}
+
+.sub_menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background:var(--color-dark);
+    margin: 15px 0 10px;
+}
+.sub_menu_link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+}
+/* mau chu trong o menu so xuong */
+.sub_menu_link p{
+    width: 100%;
+    color:var(--color-dark);
+    cursor: pointer;
+    font-size: 16px;
+}
+/* day la cai dau > */
+.sub_menu_link span{
+    font-size: 22px;
+    color:var(--color-dark);
+}
+.sub_menu_link:hover span{
+    transform: translateX(5px);
+}
+.sub_menu_link:hover p {
+font-weight: 600;
+}
+
+/* style phan main  */
+.container_addpost{
+    width: calc(80% - 20px); /* Chiều rộng của div là 100% của trang trừ đi 20px (10px ở mỗi bên) */
+  margin: 0 auto; /* Để căn giữa theo chiều ngang */
+  padding: 25px; /* Khoảng cách bên trong div */
+  box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước thực của div */
+  background-color: #fff;
+
+ 
+}
+.create_article{
+    font-size: 35px;
+    text-align: center;
+    margin-bottom: 10px;
+
+
+}
+
+/* bat dau stly phan giua */
+/* start style o input ......................*/
+.article_form input {
+    /* background-color: aqua; */
+    font-family: "Roboto",serif;
+    font-size: 1.375rem;
+    margin-top: 2px;
+    width: 100%;
+    height:54px;
+    padding: 15px 15px 15px 35px ;
+    border-radius: 200px;
+    box-shadow: var(--shadow);
+    border: #ede1c0 solid 2px;
+    margin-bottom: 15px;
+}
+.article_form input:focus{
+    outline: none;
+}
+
+/* end style o input ......................*/
+
+label{
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+
+
+.navbar_btn{
+    text-align: center;
+    color: #fff;
+    padding: .6rem 1rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+    font-size: 1rem;
+    background-color: #e0ac1c;
+    margin-left: 45px;
+    width: 150px;
+    min-height: auto;
+}
+
+/* style nut create new */
+.btn_create{
+    font-size: 1rem;
+    background-color: var(--Red);
+    margin-left: 0px;
+    width: 130px;
+    height: 30px;
+    text-align: center;
+    color: #fff;
+
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+}
+/* style nut back to list */
+.btn_backtolist{
+    font-size: 1rem;
+    background-color: var(--Red);
+    margin-left: 0px;
+    width: fit-content;
+    height: 30px;
+    text-align: center;
+    color: #fff;
+
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+}
+/* style phan main article */
+
+main .analyse_article{
+    display: flex;
+    flex-direction: column;
+}
+
+main .analyse_article > div{
+    background-color: var(--color-white);
+    padding: 15px;
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+main .analyse_article > div:hover{
+    box-shadow: none;
+}
+
+main .analyse_article > div .status_article{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .analyse_article h2{
+    margin-left: 0.5rem;
+    font-size: 1.6rem;
+}
+/* end style phan main article */
+
+/* style button trong bang */
+.btn_table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.butoon_table{
+    text-align: center;
+    color: #fff;
+    background-color: var(--color-danger);
+    padding: .2rem 0.2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+    width: 60px;
+    height: 25px;
+    margin-top: 5px;
+    font-size: 13px;
+    
+}
+.butoon_table:hover{
+    background-color: #eccd77;
+    transition: var(--smooth);
+}
+
+.entries {
+    font-family: Arial, sans-serif;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+  
+  select {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+
+  
+  /* stlye buttom post */
+.custom-label {
+    background-color: #e0ac1c;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.custom-label:hover {
+	background: #e7c976;
+}
+.bottom_post{
+    margin-bottom: 20px;
+    text-align: center;
+}
+#preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 20px;
+}
+/* edit chu  */
+.edit_word{
+    width: 100%;
+    height:38px;   
+    border: 1px solid #e7c976;
+    border-radius: 4px;
+    background: #f2f2f2;
+    display: flex;
+
+}
+
+/* style vi tri cua div boc cac icon */
+.edit_word .icon_editw{
+    display: inline-flex;
+    padding: 2px;
+}
+/* style vi tri cac icon trong tung o cua no */
+.edit_word .icon_editw li {
+    border: 1px solid #e7c976;
+    border-bottom: 1px solid #b3b3b3;
+    border-radius: 4px;
+   padding: 1px;
+    background: #fff;
+    height: 32px;
+    width: 37px;
+    margin-right: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit_word .icon_editw li i{
+    width: 34px;
+    height: 30px;
+    text-decoration: none;
+    color: #0c0c0c; /* Màu chữ */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold; /* Định dạng chữ in đậm */
+}
+.edit_word .icon_editw li img{
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+.active, .edit_word .icon_editw li a:hover{
+    background: #dad5d5;
+}
+
+/* bang chu thich hien thi khi hover chuot qua */
+.tooltip-container {
+    position: relative;
+}
+  .tooltip-container:hover .tooltip {
+    display: block;
+}
+  .tooltip {
+    width: fit-content;
+    height: fit-content;
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 8px;
+    background-color: #333;
+    color: #fff;
+    padding: 2px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap; /* Ngăn chú thích xuống dòng */
+  }
+.font-size-dropdown {
+    display: flex;
+    margin: 5px;
+    align-items: center;
+    font-size: 18px;
+}
+/* phan so xuong size phong chu */
+.font-size-dropdown select {
+    width: auto;
+    height: 32px;
+    margin-left: 2px;
+    border: 1px solid rgb(231, 201, 118);
+}
+.content_post {
+    max-width: 100%; /* Đặt chiều rộng tối đa cho phần nội dung */
+    height: 262px;
+    margin: 3px;
+      /* Canh giữa phần nội dung */
+      /* Khoảng cách giữa lề và nội dung */
+  }
+  
+  #editor {
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 260px;
+    padding: 10px;     /* Khoảng cách giữa đường viền và nội dung trong #editor */
+    overflow: auto; /* Thêm thanh cuộn khi nội dung vượt quá kích thước */
+    background-color: #fff; /* Màu nền */
+    border-radius: 5px; /* Bo tròn các góc */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+  }
+  
+  #editor:focus {
+    outline: none; /* Loại bỏ đường viền khi phần tử được focus */
+    border-color: #e0ac1c; /* Đổi màu đường viền khi phần tử được focus */
+  }
+  .link-input {
+    display: none;
+  }
+/* end pop up *//* end pop up *//* end pop up *//* end pop up */
+
+/*start  style o them anh cho bai dang  */
+
+.container_img {
+    margin-left: 35%;
+	max-width: 300px;
+	width: 100%;
+    margin-top: -35px;
+	background: #fff;
+	padding: 5px;
+	border-radius: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;    
+       margin-top: 20px;
+}
+.img-area {
+	position: relative;
+	width: 100%;
+	height: 220px;
+	background: var(--grey);
+	margin-bottom: 10px;
+	border-radius: 15px;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: #e0ac1c solid 2px;
+}
+.img-area .icon {
+	font-size: 70px;
+}
+.img-area h3 {
+	font-size: 18px;
+	font-weight: 500;
+	margin-bottom: 4px;
+}
+.img-area p {
+	color: #999;
+}
+.img-area p span {
+	font-weight: 600;
+}
+.img-area img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	z-index: 1;
+}
+.img-area::before {
+	content: attr(data-img);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, .5);
+	color: #fff;
+	font-weight: 500;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	opacity: 0;
+	transition: all .3s ease;
+	z-index: 200;
+}
+.img-area.active:hover::before {
+	opacity: 1;
+}
+.select-image {
+	display: block;
+	width: 50%;
+	padding: 10px 0;
+	border-radius: 15px;
+	background: #e0ac1c;
+	color: #fff;
+	font-weight: 500;
+	font-size: 15px;
+	border: none;
+	cursor: pointer;
+	transition: all .3s ease;
+    text-align: center; /* căn giữa nội dung */
+}
+.select-image:hover {
+	background: #e7c976;
+}
+.create_btn{
+    font-size: 1.3rem;
+    background-color:#e0ac1c;
+    margin-left: 42%;
+    margin-top: 10px;
+    width: 105px;
+    min-height: auto;
+    text-align: center;
+    color: #fff;
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+
+}
+.create_btn:hover{
+    background-color: #eccd77;
+    transition: var(--smooth);
+}
+/* end style class them anh bai dang  */
+/* ket thuc style cho phan giua *//* ket thuc style cho phan giua */
+
+/* <!-- START FOOTER --> *//* <!-- START FOOTER --> */
+/* The footer is fixed to the bottom of the page */
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+@media (max-height:800px) {
+    footer {
+        position: static;
+    }
+    header {
+        padding-top: 40px;
+    }
+}
+
+.footer-distributed {
+    background-color: #2d2a30;
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    text-align: left;
+
+    font: bold 16px sans-serif;
+    padding: 20px 50px 10px 50px; 
+    margin-top: 50px;
+}
+
+.footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+    width: 30%;
+    
+}
+
+.footer-distributed h3 {
+    color: #ffffff;
+    font: normal 50px 'Cookie', cursive;
+    margin: 0;
+}
+
+
+.footer-distributed h3 span {
+    margin-left: 5px;
+    color: #e0ac1c;
+    font-size: 18px;
+
+}
+
+/* Footer links */
+
+.footer-distributed .footer-links {
+    color: #ffffff;
+    margin: 20px 0 12px;
+}
+
+.footer-distributed .footer-links a {
+    display: inline-block;
+    line-height: 1.8;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-distributed .footer-company-name {
+    color: #8f9296;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+}
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+    width: 35%;
+}
+
+.footer-distributed .footer-center i {
+    background-color: #33383b;
+    color: #ffffff;
+    font-size: 25px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 42px;
+    margin: 10px 15px;
+    vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope {
+    font-size: 17px;
+    line-height: 38px;
+}
+
+.footer-distributed .footer-center p {
+    display: inline-block;
+    color: #ffffff;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.footer-distributed .footer-center p span {
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.footer-distributed .footer-center p a {
+    color: #ffffff;
+    text-decoration: none;
+    
+}
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+    width: 30%;
+}
+
+.footer-distributed .footer-company-about {
+    line-height: 20px;
+    color: #92999f;
+    font-size: 13px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+    display: block;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons {
+    margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    background-color: #33383b;
+    border-radius: 2px;
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin-right: 3px;
+    margin-bottom: 5px;
+}
+
+.footer-distributed .footer-icons a:hover {
+    background-color: #3F71EA;
+}
+
+.footer-links a:hover {
+    color: #3F71EA;
+}
+
+@media (max-width: 880px) {
+    .footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+        display: block;
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .footer-distributed .footer-center i {
+        margin-left: 0;
+    }
+}       
+/* <!-- END FOOTER --> *//* <!-- END FOOTER --> */
+.article_form .bx-category {
+    /* background-color: aqua; */
+    font-family: "Roboto",serif;
+    font-size: 1.375rem;
+    margin-top: 2px;
+    width: 15%;
+    height:54px;
+    padding: 15px 15px 15px 35px ;
+    border-radius: 200px;
+    box-shadow: var(--shadow);
+    border: #e0ac1c solid 2px;
+    margin-bottom: 15px;
+}
+.article_form .bx-category:focus{
+    outline: none;
+}
