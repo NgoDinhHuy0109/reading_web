@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="DTO.CategoryDTO" %>
+<%@ page import="DTO.ArticleDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Service.Article" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,31 +43,51 @@
                         <option value="100">100</option>
                     </select>
                 </div>
+                <% List<ArticleDTO> articlesList = (List<ArticleDTO>) request.getAttribute("articlesList"); %>
+                <% if (articlesList != null && !articlesList.isEmpty()) { %>
                 <table>
                     <tr>
-                        <th>Article Name</th>
-                        <th>Description</th>
+                        <th>Title</th>
+                        <th>Title Image</th>
+                        <th>Content</th>
+                        <th>Category</th>
                         <th>Created Time</th>
                         <th>Updated Time</th>
-                        <th>
-
-                        </th>
+                        <th>Actions</th>
                     </tr>
+                    <% for (ArticleDTO article : articlesList) { %>
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>
+                        <td><%= article.getArticle().getTitle() %>
+                        </td>
+                        <td><%= article.getArticle().getTitleImage() %>
+                        </td>
+                        <td><%= article.getArticle().getContent() %>
+                        </td>
+                        <td><%= new Article().getCategoryNameByCategoryId(article.getArticle().getCategoriesByCategoryId().getCategoryId()) %>
+                        </td>
+                        <td><%= article.getCreatedAtString() %>
+                        </td>
+                        <td><%= article.getUpdatedAtString() %>
+                        </td>
+                        <td>
                             <div class="btn_table">
-                                <a href="article_edit.jsp">
-                                    <button class="button_table" type="submit" id="edit"> Edit</button>
+                                <a href="article_edit.jsp?articleId=<%= article.getArticle().getArticleId() %>">
+                                    <button class="button_table" type="button" id="edit"> Edit</button>
                                 </a>
-                                <button class="button_table" type="submit" id="delete"> Delete</button>
+                                <form action="article" method="post">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="articleId"
+                                           value="<%= article.getArticle().getArticleId() %>">
+                                    <button class="button_table" type="submit" id="delete"> Delete</button>
+                                </form>
                             </div>
-                        </th>
+                        </td>
                     </tr>
+                    <% } %>
                 </table>
+                <% } else { %>
+                <p>No articles available.</p>
+                <% } %>
             </div>
         </div>
     </main>

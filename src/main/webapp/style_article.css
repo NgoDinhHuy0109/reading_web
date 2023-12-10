@@ -11,12 +11,16 @@
     --color-light: rgba(132, 139, 200, 0.18);
     --color-dark-variant: #677483;
     --color-background: #f6f6f9;
+
     --card-border-radius: 2rem;
     --border-radius-1: 0.4rem;
     --border-radius-2: 1.2rem;
+
     --card-padding: 1.8rem;
     --padding-1: 1.2rem;
+
     --box-shadow: 0 2rem 3rem var(--color-light);
+
     /* styke cua minh */
     --color-primary: #6C9BCF;
     --pink: #FF99CC;
@@ -47,6 +51,7 @@
     --orange: #fa5652;
     --light-pink: #fff9f9;
     --shadow: 0 20px 60px 0 rgba(226, 244, 115, 0.2);
+    --linear-gradient: linear-gradient(45deg, #f06, #3cf, #f06);
     --smooth: all .3s ease-in;
 }
 
@@ -97,18 +102,23 @@ img{
 h1{
     font-weight: 800;
     font-size: 1.8rem;
+    margin-top: 45px;
 }
 
 h2{
     font-weight: 600;
+    font-size: 1.4rem;
 }
+
 h3{
     font-weight: 500;
     font-size: 0.87rem;
 }
+
 small{
     font-size: 0.76rem;
 }
+
 p{
     color: var(--color-dark-variant);
 }
@@ -145,12 +155,15 @@ b{
     gap: 1.8rem;
     grid-template-columns: 12rem auto ;
     overflow: hidden; /* Tắt thanh cuộn cho container */
+
 }
 
 aside{
     height: 100vh;
-    width: 170px;
+    width: 168px;
+
 }
+
 aside .toggle{
     display: flex;
     align-items: center;
@@ -250,28 +263,32 @@ aside .sidebar .message-count{
 main{
     margin-top: 1.4rem;
     width: 100%;
-    height: auto;
+    height: 100vh;
     overflow-y: auto;
     padding-bottom: 30px;
 }
 
 /* start phan anh dai dien user */
 
+
 main .profile{
+    position: fixed;
+    top: 1.4rem; /* Điều chỉnh khoảng cách từ đỉnh trình duyệt */
+    right: 65px; /* Điều chỉnh khoảng cách từ cạnh phải của trình duyệt */
+    width: 81vw;
+    background: #f6f6f9;
     display: flex;
     gap: 2rem;
     text-align: right;
     justify-content: flex-end;
-    margin-right: 15px;
 }
-
-
 
 main .profile .profile-photo{
     width: 2.8rem;
     height: 2.8rem;
     border-radius: 50%;
     overflow: hidden;
+
 }
 /* style phan bang */
 table {
@@ -299,12 +316,12 @@ tr:hover {
 }
 
 /* start style o input ......................*/
-.article_form input {
+.article_form input, .article_form .bx-category {
     /* background-color: aqua; */
     font-family: "Roboto",serif;
     font-size: 1.375rem;
     margin-top: 2px;
-    width: 60%;
+    width: 15%;
     height:54px;
     padding: 15px 15px 15px 35px ;
     border-radius: 200px;
@@ -312,7 +329,7 @@ tr:hover {
     border: #e0ac1c solid 2px;
     margin-bottom: 15px;
 }
-.article_form input:focus{
+.article_form input, .article_form .bx-category:focus{
     outline: none;
 }
 
@@ -324,7 +341,7 @@ label{
 
 /* style cac nut button */
 button{
-  
+
 }
 button:hover{
     background-color: #eccd77;
@@ -337,6 +354,12 @@ button:hover{
     margin-left: 45px;
     width: 105px;
     min-height: auto;
+    text-align: center;
+    color: #fff;
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
 }
 
 /* style nut create new */
@@ -346,6 +369,13 @@ button:hover{
     margin-left: 0px;
     width: 130px;
     height: 30px;
+    text-align: center;
+    color: #fff;
+
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
 }
 /* style nut back to list */
 .btn_backtolist{
@@ -354,6 +384,15 @@ button:hover{
     margin-left: 0px;
     width: fit-content;
     height: 30px;
+    text-align: center;
+    color: #fff;
+
+    padding: .5rem 2rem;   /* tuy chinh kich thuoc cua vien button */
+    border-radius: 100px;     /* bo tron nut button*/
+    cursor: pointer;
+    transition: var(--smooth);
+    margin-top: 10px;
+    margin-bottom: 15px;
 
 }
 /* style phan main article */
@@ -365,7 +404,7 @@ main .analyse_article{
 
 main .analyse_article > div{
     background-color: var(--color-white);
-    padding: var(--card-padding);
+    padding: 15px;
     border-radius: var(--card-border-radius);
     margin-top: 1rem;
     box-shadow: var(--box-shadow);
@@ -394,19 +433,20 @@ main .analyse_article h2{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
 }
 .button_table{
     text-align: center;
     color: #fff;
-    background-color: #eccd77;
+    background-color: var(--color-danger);
     padding: .2rem 0.2rem;   /* tuy chinh kich thuoc cua vien button */
     border-radius: 100px;     /* bo tron nut button*/
     cursor: pointer;
     transition: var(--smooth);
-    width: 100px;
+    width: 60px;
     height: 25px;
+    margin-top: 5px;
     font-size: 13px;
+
 }
 .button_table:hover{
     background-color: #eccd77;
@@ -416,20 +456,20 @@ main .analyse_article h2{
 .entries {
     font-family: Arial, sans-serif;
     margin-bottom: 20px;
-  }
-  
-  label {
+}
+
+label {
     margin-right: 10px;
-  }
-  
-  select {
+}
+
+select {
     padding: 5px;
     font-size: 16px;
-  }
-  
+}
 
-  
-  /* stlye buttom post */
+
+
+/* stlye buttom post */
 .custom-label {
     background-color: #e0ac1c;
     color: #fff;
@@ -438,7 +478,7 @@ main .analyse_article h2{
     cursor: pointer;
 }
 .custom-label:hover {
-	background: #e7c976;
+    background: #e7c976;
 }
 .bottom_post{
     margin-bottom: 20px;
@@ -452,7 +492,7 @@ main .analyse_article h2{
 /* edit chu  */
 .edit_word{
     width: 100%;
-    height:38px;   
+    height:38px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background: #f2f2f2;
@@ -470,7 +510,7 @@ main .analyse_article h2{
     border: 1px solid #ccc;
     border-bottom: 1px solid #b3b3b3;
     border-radius: 4px;
-   padding: 1px;
+    padding: 1px;
     background: #fff;
     height: 32px;
     width: 37px;
@@ -495,7 +535,7 @@ main .analyse_article h2{
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 
 }
 .active, .edit_word .icon_editw li a:hover{
@@ -506,10 +546,10 @@ main .analyse_article h2{
 .tooltip-container {
     position: relative;
 }
-  .tooltip-container:hover .tooltip {
+.tooltip-container:hover .tooltip {
     display: block;
 }
-  .tooltip {
+.tooltip {
     width: fit-content;
     height: fit-content;
     display: none;
@@ -522,7 +562,7 @@ main .analyse_article h2{
     border-radius: 5px;
     font-size: 12px;
     white-space: nowrap; /* Ngăn chú thích xuống dòng */
-  }
+}
 .font-size-dropdown {
     display: flex;
     margin: 5px;
@@ -539,11 +579,11 @@ main .analyse_article h2{
     max-width: 100%; /* Đặt chiều rộng tối đa cho phần nội dung */
     height: 262px;
     margin: 3px;
-      /* Canh giữa phần nội dung */
-      /* Khoảng cách giữa lề và nội dung */
-  }
-  
-  #editor {
+    /* Canh giữa phần nội dung */
+    /* Khoảng cách giữa lề và nội dung */
+}
+
+#editor {
     border: 1px solid #ccc;
     width: 100%;
     height: 260px;
@@ -552,15 +592,103 @@ main .analyse_article h2{
     background-color: #fff; /* Màu nền */
     border-radius: 5px; /* Bo tròn các góc */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
-  }
-  
-  #editor:focus {
+}
+
+#editor:focus {
     outline: none; /* Loại bỏ đường viền khi phần tử được focus */
     border-color: #e0ac1c; /* Đổi màu đường viền khi phần tử được focus */
-  }
-  .link-input {
+}
+.link-input {
     display: none;
-  }
+}
 /* end pop up *//* end pop up *//* end pop up *//* end pop up */
-
+.container_img {
+    margin-left : 0%;
+    max-width: 300px;
+    width: 100%;
+    background: #fff;
+    padding: 5px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: var(--grey);
+    margin-bottom: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: #e0ac1c solid 2px;
+}
+.img-area .icon {
+    font-size: 70px;
+}
+.img-area h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.img-area p {
+    color: #999;
+}
+.img-area p span {
+    font-weight: 600;
+}
+.img-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 100;
+}
+.img-area::before {
+    content: attr(data-img);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 200;
+}
+.img-area.active:hover::before {
+    opacity: 1;
+}
+.select-image {
+    display: block;
+    width: 50%;
+    padding: 10px 0;
+    border-radius: 15px;
+    background: #e0ac1c;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    text-align: center; /* căn giữa nội dung */
+}
+.select-image:hover {
+    background: #e7c976;
+}
 

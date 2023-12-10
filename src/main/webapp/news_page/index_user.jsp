@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
+<%@ page import="DTO.CategoryDTO" %>
+<%@ page import="Service.Category" %>
+<%@ page import="java.util.List" %>
+<%@ page import="DTO.ArticleDTO" %>
+<%@ page import="Service.Article" %>
+<%@ page import="models.UserInfoEntity" %>
+<%@ page import="Service.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,50 +34,63 @@
     <nav>
         <ul>
             <li><a href="#" id="">Home Page </a></li>
-            <li><a href="#">Category </a></li>
+            <%
+                List<CategoryDTO> categories = new Category().getAllCategories();
+                for (CategoryDTO category : categories) {
+            %>
+            <li>
+                <a href="view_category.jsp?categoryID=<%=category.getCategory().getCategoryId()%>"></a>
+                <%= category.getCategory().getCategoryName() %>
+            </li>
+            <%
+                }
+            %>
         </ul>
     </nav>
 </div>
+
 <div class="fist_container">
+    <%
+        User userApplication = new User(); // Khởi tạo một đối tượng User
+
+        // Lấy danh sách tất cả các bài báo, sắp xếp theo ngày đăng giảm dần
+        List<ArticleDTO> articleDTOS = new Article().getAllArticles();
+
+        // Biến đếm để phân loại bài báo
+        int count = 0;
+        for (ArticleDTO article : articleDTOS) {
+            if (count == 0) {
+    %>
     <div class="news_1">
-        <div class="top"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168933_cover-re.jpg" alt="">
+        <div class="top">
+            <%=article.getArticle().getTitleImage()%>
         </div>
         <div class="bottom">
-            <h3>Chơi Resident Evil Village trên iPhone 15 Pro Max: Vẫn chỉ có Capcom là thương Apple nhất</h3>
+            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>&category_Name=<%=article.getArticle().getCategory().getCategoryName()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
             <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
                 <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
+                <span class="jsx-3594291015 author">
+                </span>
             </a>
         </div>
     </div>
+    <% } else if (count >= 1 && count <= 2) { %>
     <div class="news_2">
-        <div class="top_2"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168452_cover-tensor-g3-snapdragon-8-gen-3.jpg"
-                alt=""></div>
+        <div class="top_2">
+            <%=article.getArticle().getTitleImage()%>
+        </div>
         <div class="bottom_2">
-            <h3>Chơi Resident Evil Village trên iPhone 15 Pro Max: Vẫn chỉ có Capcom là thương Apple nhất</h3>
-            <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
+            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
             <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
                 <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
                 <span class="jsx-3594291015 author">P.W</span>
             </a>
         </div>
     </div>
-    <div class="news_2">
-        <div class="top_2"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168452_cover-tensor-g3-snapdragon-8-gen-3.jpg"
-                alt=""></div>
-        <div class="bottom_2">
-            <h3>Chơi Resident Evil Village trên iPhone 15 Pro Max: Vẫn chỉ có Capcom là thương Apple nhất</h3>
-            <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
+    <% }
+        count++;
+    }
+    %>
 </div>
 <div class="second_container">
     <div class="second_1">
@@ -151,7 +172,8 @@
                 src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168401_vlcsnap-2023-10-30-13h43m04s600.jpg"
                 alt=""></div>
         <div class="right">
-            <h3>Đánh giá Alan Wake II: Game kinh dị này sẽ giữ chân anh em vì cốt truyện quá đẳng cấp</h3>
+            <h3>Đánh giá Alan Wake II: Game kinh dị này sẽ giữ chân anh em vì cốt truyện quá đẳng cấp. Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
+                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</h3>
             <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
                 cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
             <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">

@@ -10,19 +10,24 @@ import java.util.UUID;
 @Entity
 @Table(name = "accounts",schema = "public",catalog = "reading-web")
 public class  AccountsEntity implements Serializable  {
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "account_id",columnDefinition = "uuid")
     private UUID accountId;
+    @Getter
     @Basic
     @Column(name = "userName",nullable = false,unique = true)
     private String userName;
+    @Getter
     @Basic
     @Column(name = "password",nullable = false)
     private String password;
+    @Getter
     @Basic
     @Column(name = "createdAt", nullable = false)
     private Long createdAt;
+    @Getter
     @Basic
     @Column(name = "updatedAt", nullable = false)
     private Long updatedAt;
@@ -47,33 +52,22 @@ public class  AccountsEntity implements Serializable  {
 
     }
 
-    public UUID getAccountId() {
-        return accountId;
-    }
     public void setAccountId(UUID accountId) {
         this.accountId = accountId;
     }
-    public String getUserName() {
-        return userName;
-    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public String getPassword() {
-        return password;
-    }
+
     public void setPassword(String password) {
         this.password = password;
     }
-    public Long getCreatedAt() {
-        return createdAt;
-    }
+
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-    public Long getUpdatedAt() {
-        return updatedAt;
-    }
+
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
@@ -92,21 +86,6 @@ public class  AccountsEntity implements Serializable  {
         this.accountId = UUID.randomUUID();
         this.userName = userName;
         this.password = password;
-    }
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-
-        AccountsEntity that = (AccountsEntity) object;
-
-        if (!Objects.equals(accountId, that.accountId)) return false;
-        if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-        if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
-        if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) return false;
-        if (isDeleted != null ? !isDeleted.equals(that.isDeleted) : that.isDeleted != null) return false;
-        return true;
     }
     @Override
     public int hashCode() {

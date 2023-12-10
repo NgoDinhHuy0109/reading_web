@@ -1,10 +1,12 @@
 package DTO;
 
+import lombok.Getter;
 import models.CategoriesEntity;
 import models.UserInfoEntity;
 
 import java.text.SimpleDateFormat;
 
+@Getter
 public class UserDTO {
     private final UserInfoEntity userInfo;
     private final String createdAtString;
@@ -19,14 +21,5 @@ public class UserDTO {
         this.userInfo = userInfo;
         this.createdAtString = createdAtString;
         this.updatedAtString = updatedAtString;
-    }
-    public UserInfoEntity getUserInfo() {
-        return userInfo;
-    }
-    public String getCreatedAtString() {
-        return createdAtString;
-    }
-    public String getUpdatedAtString() {
-        return updatedAtString;
     }
 }

@@ -1,14 +1,12 @@
 import models.CategoriesEntity;
 import utils.HibernateUtils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import models.*;
 import Service.*;
-import DTO.*;
-import java.io.FileReader;
-import java.util.List;
+
+import java.util.UUID;
+
 public class TestData {
     public static void main(String[] args) throws FileNotFoundException {
 //        Gson gson = new Gson();
@@ -28,7 +26,7 @@ public class TestData {
 //            HibernateUtils hibernateUtils = new HibernateUtils(item);
 //            hibernateUtils.saveEntity();
 //        }
-        testGetAllCategories();
+        getArticleByCateID();
 
     }
 
@@ -40,26 +38,11 @@ public class TestData {
         HibernateUtils hibernateUtils = new HibernateUtils(categoriesTD);
         hibernateUtils.saveEntity();
     }
-    public static void testGetAllCategories() {
-        Category categoryService = new Category();
 
-        // Retrieve all categories and print the results
-        List<CategoryDTO> allCategories = categoryService.getAllCategories();
-
-        if (!allCategories.isEmpty()) {
-            System.out.println("All Categories:");
-            for (CategoryDTO categoryDTO : allCategories) {
-                CategoriesEntity category = categoryDTO.getCategory();
-                System.out.println("Category ID: " + category.getCategoryId());
-                System.out.println("Category Name: " + category.getCategoryName());
-                System.out.println("Description: " + category.getDescription());
-                System.out.println("Created At: " + categoryDTO.getCreatedAtString());
-                System.out.println("Updated At: " + categoryDTO.getUpdatedAtString());
-                System.out.println("Is Deleted: " + category.getIsDeleted());
-                System.out.println("--------------------");
-            }
-        } else {
-            System.out.println("No categories found.");
-        }
+    public static void getArticleByCateID() {
+       Article userservice = new Article();
+       ArticlesEntity userInfo = new ArticlesEntity();
+       userInfo= (ArticlesEntity) userservice.getArticlesByCategoryID(UUID.fromString("bb2b8272-44cb-4c7b-b20e-6c41a5b898a0"));
+       System.out.println(userInfo.getTitle());
     }
 }

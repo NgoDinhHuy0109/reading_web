@@ -3,6 +3,7 @@ package Service;
 import DTO.UserDTO;
 import com.google.gson.Gson;
 import models.AccountsEntity;
+import models.CategoriesEntity;
 import models.UserInfoEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -56,6 +57,15 @@ public class   User extends HibernateUtils {
             // Log the error using a logging framework
             System.out.println("Error creating user: " + error);
             return Collections.emptyList();
+        }
+    }
+    public UserInfoEntity getUserById(UUID categoryId) {
+        try {
+            // Retrieve the category by its ID
+            return (UserInfoEntity) getEntityById(UserInfoEntity.class, categoryId);
+        } catch (Exception error) {
+            System.out.println("Error retrieving category by ID: " + error);
+            return null; // Return null in case of an error
         }
     }
     public boolean isEmailExists(String email) {

@@ -1,6 +1,7 @@
 package controller;
 
 import Service.Category;
+import jakarta.servlet.http.HttpSession;
 import models.CategoriesEntity;
 import DTO.*;
 import jakarta.servlet.ServletException;
@@ -19,6 +20,7 @@ public class CategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
             String url = "/cate_home.jsp";
             String action = request.getParameter("action");
             if (action == null) {
@@ -37,7 +39,7 @@ public class CategoryServlet extends HttpServlet {
                     request.setAttribute("error", "Category already exists");
                     getServletContext().getRequestDispatcher(url).forward(request, response);
                     //
-                    //return;
+                    return;
                 }
                 try {
                     categoryApplication.createCategory(categoriesEntity);
@@ -93,10 +95,11 @@ public class CategoryServlet extends HttpServlet {
                     request.setAttribute("error", e.getMessage());
                 }
             }
-            // Retrieve the updated list of categories from the database
             List<CategoryDTO> categoriesList = categoryApplication.getAllCategories();
             // Set the categoriesList attribute before forwarding
             request.setAttribute("categoriesList", categoriesList);
+
+            // Retrieve the updated list of categories from the database
             // Forward to the JSP
             getServletContext().getRequestDispatcher(url).forward(request, response);
         } catch (Exception e) {
@@ -108,16 +111,7 @@ public class CategoryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            List<CategoryDTO> categoriesList = categoryApplication.getAllCategories();
-            // Set the categoriesList attribute in the request
-            request.setAttribute("categoriesList", categoriesList);
-            // Forward to the JSP
-            getServletContext().getRequestDispatcher("/cate_home.jsp").forward(request, response);
-        } catch (Exception e) {
-            // Handle exceptions more gracefully, redirect to an error page
-            response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
-        }
+        doPost(request, response);
     }
 
 

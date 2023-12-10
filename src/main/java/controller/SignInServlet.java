@@ -67,23 +67,26 @@ public class SignInServlet extends HttpServlet {
                                 url = "/sign_in_error.jsp";
                                 request.setAttribute("error", "Can not get");
                                 getServletContext().getRequestDispatcher(url).forward(request, response);
+                                return;
 
+                            }
+                            String jSessionId = session.getId();
+                            List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
+
+                            session.setAttribute("JSESSIONID", jSessionId);
+                            for (UserDTO user : userList)
+                            {
+                                session.setAttribute("username", user.getUserInfo().getFullName());
                             }
                             //check role
                             if(RoleString.admin.equals(accounts.getRole()))
                             {
-                                List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
-                                for (UserDTO user : userList)
-                                {
-                                    session.setAttribute("username", user.getUserInfo().getFullName());
-                                }
                                 url = "/dashboard.jsp";
                             }
                             if(RoleString.reader.equals(accounts.getRole()))
                             {
-                                List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
                                 session.setAttribute("UserInformation", userList);
-                                url = "/images/index_user.jsp";
+                                url = "/news_page/index_user.jsp";
                             }
 
                         } else {

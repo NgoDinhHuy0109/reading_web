@@ -1,5 +1,6 @@
 package models;
 import jakarta.persistence.*;
+import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -10,22 +11,28 @@ import java.util.Objects;
 @Entity
 @Table(name = "categories", schema = "public", catalog = "reading-web")
 public class CategoriesEntity implements Serializable{
+    @Getter
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Id
     @Column(name = "category_id",columnDefinition = "uuid")
     private UUID categoryId;
+    @Getter
     @Basic
     @Column(name = "categoryName", nullable = false)
     private String categoryName;
+    @Getter
     @Basic
     @Column(name = "description", nullable = false,columnDefinition = "TEXT")
     private String description;
+    @Getter
     @Basic
     @Column(name = "createdAt", nullable = false)
     private Long createdAt;
+    @Getter
     @Basic
     @Column(name = "updatedAt", nullable = false)
     private Long updatedAt;
+    @Getter
     @Basic
     @Column(name = "isDeleted", nullable = false)
     private Boolean isDeleted;
@@ -33,27 +40,27 @@ public class CategoriesEntity implements Serializable{
     public CategoriesEntity(String categoryName) { this.categoryName = categoryName; }
     @OneToMany(mappedBy = "category")
     private Collection<ArticlesEntity> listArticle;
-    public UUID getCategoryId() { return categoryId;}
+
     public void setCategoryId(UUID categoryId) {
         this.categoryId = categoryId;
     }
-    public String getCategoryName() { return categoryName; }
+
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-    public  String getDescription() { return description; }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public Long getCreatedAt() {return createdAt; }
+
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-    public Long getUpdatedAt() {return updatedAt; }
+
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-    public Boolean getIsDeleted () {return isDeleted; }
+
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }

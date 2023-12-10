@@ -1,6 +1,5 @@
 package utils.cookie;
 
-import com.mchange.v2.lang.StringUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,9 +8,18 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import static Service.OTPGenerator.encodeOTP;
+import static Service.OTPGenerator.generateOTP;
+
 public class CookieUtils {
     public Boolean setCookie(HttpServletResponse httpServletResponse, HttpServletRequest request, String json, String ele) {
         Cookie userCookie = new Cookie("accounts", URLEncoder.encode(json, StandardCharsets.UTF_8));
+        String otp = generateOTP(); // Hàm generateOTP() tạo mã OTP
+
+        // Lưu mã OTP vào Cookie
+        Cookie otpCookie = new Cookie("otp", encodeOTP(otp)); // Hàm encodeOTP() để mã hóa OTP
+        otpCookie.setMaxAge(60); // Thời gian tồn tại của Cookie (ví dụ: 5 phút)
+        httpServletResponse.addCookie(otpCookie);
         //expire after 1 day
         userCookie.setMaxAge(14400);
         httpServletResponse.addCookie(userCookie);
@@ -32,8 +40,30 @@ public class CookieUtils {
                 }
             }
         }
-
         return userCookieValue;
+    }
+    public Boolean setOTP(HttpServletResponse httpServletResponse, HttpServletRequest request) {
+        String otp = generateOTP(); // Hàm generateOTP() tạo mã OTP
+
+        // Lưu mã OTP vào Cookie
+        Cookie otpCookie = new Cookie("otp", encodeOTP(otp)); // Hàm encodeOTP() để mã hóa OTP
+        otpCookie.setMaxAge(60); // Thời gian tồn tại của Cookie (ví dụ: 5 phút)
+        httpServletResponse.addCookie(otpCookie);
+
+        //check if cookie is saved
+        return getOTPSentToUserFromCookieOrStorage(request) != null;
+    }
+    public String getOTPSentToUserFromCookieOrStorage(HttpServletRequest request) {
+        // Lấy mã OTP từ Cookie (nếu sử dụng Cookie để lưu trữ)
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("otp".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 
     public void deleteCookie(String ele,  HttpServletResponse response) {

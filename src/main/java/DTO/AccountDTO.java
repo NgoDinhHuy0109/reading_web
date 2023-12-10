@@ -1,10 +1,11 @@
 package DTO;
 
+import lombok.Getter;
 import models.AccountsEntity;
-import models.CategoriesEntity;
 
 import java.text.SimpleDateFormat;
 
+@Getter
 public class AccountDTO {
     private final AccountsEntity accounts;
     private final String createdAtString;
@@ -19,14 +20,5 @@ public class AccountDTO {
         this.accounts = accounts;
         this.createdAtString = createdAtString;
         this.updatedAtString = updatedAtString;
-    }
-    public AccountsEntity getAccounts() {
-        return accounts;
-    }
-    public String getCreatedAtString() {
-        return createdAtString;
-    }
-    public String getUpdatedAtString() {
-        return updatedAtString;
     }
 }

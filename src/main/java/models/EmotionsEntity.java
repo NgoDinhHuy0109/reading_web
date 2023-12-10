@@ -1,5 +1,7 @@
 package models;
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -8,19 +10,24 @@ import java.util.UUID;
 @Entity
 @Table(name = "emotions", schema = "public", catalog = "reading-web")
 public class EmotionsEntity implements Serializable  {
+    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "emotion_id",columnDefinition = "uuid")
     private UUID emotionId;
+    @Getter
     @Basic
     @Column(name = "type", nullable = false,unique = true)
     private Boolean type;
+    @Getter
     @Basic
     @Column(name = "createdAt", nullable = false)
     private Long createdAt;
+    @Getter
     @Basic
     @Column(name = "updatedAt", nullable = false)
     private Long updatedAt;
+    @Getter
     @Basic
     @Column(name = "isDeleted", nullable = false)
     private Boolean isDeleted;
@@ -28,19 +35,18 @@ public class EmotionsEntity implements Serializable  {
     @JoinColumn(name = "interaction_id", nullable = false)
     private InteractionsEntity interaction;
 
-    public UUID getEmotionId(){return emotionId;}
     public void setEmotionId(UUID emotionId){this.emotionId = emotionId;}
-    public Boolean getType(){return type;}
+
     public void setType(Boolean type){this.type = type;}
-    public Long getCreatedAt() {return createdAt; }
+
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-    public Long getUpdatedAt() {return updatedAt; }
+
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-    public Boolean getIsDeleted () {return isDeleted; }
+
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }

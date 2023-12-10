@@ -91,6 +91,50 @@
                 return null; // Return null in case of an error
             }
         }
+        public CategoriesEntity getCategoryByName(String categoryName) {
+            try {
+                String query = "FROM CategoriesEntity WHERE isDeleted = false and categoryName = :categoryName";
+                return executeQueryWithParameter(query, "categoryName", categoryName)
+                        .stream()
+                        .findFirst()
+                        .orElse(null);
+            } catch (Exception error) {
+                // Log the error instead of printing to the console
+                System.out.println("Error retrieving categories: " + error);
+                throw new RuntimeException("Error retrieving account", error);
+            }
+        }
+        public List<String> getCategoryNames() {
+            try {
+                // Query the database to get all category names
+                String query = "SELECT categoryName FROM CategoriesEntity WHERE isDeleted = false";
+                List<String> categoryNames = executeQueryForScalar(query, String.class);
+                return categoryNames;
+            } catch (Exception error) {
+                System.out.println("Error retrieving category names: " + error);
+                return Collections.emptyList(); // Return an empty list in case of an error
+            }
+        }
+        private <T> List<T> executeQueryForScalar(String query, Class<T> returnType) {
+            try (Session session = getSessionFactory().openSession()) {
+                Query<T> hqlQuery = session.createQuery(query, returnType);
+                return hqlQuery.getResultList();
+            } catch (Exception e) {
+                System.out.println("Error executing query: " + e);
+                return Collections.emptyList(); // Return an empty list in case of an error
+            }
+        }
+
+        private List<CategoriesEntity> executeQueryWithParameter(String query, String paramName, String paramValue) {
+            try (Session session = getSessionFactory().openSession()) {
+                Query<CategoriesEntity> hqlQuery = session.createQuery(query, CategoriesEntity.class);
+                hqlQuery.setParameter(paramName, paramValue);
+                return hqlQuery.getResultList();
+            } catch (Exception e) {
+                System.out.println("Error retrieving categories: " + e);
+                throw new RuntimeException("Error executing query", e);
+            }
+        }
         public List<CategoryDTO> getAllCategories() {
             try {
                 // Query the database to get all categories
@@ -123,16 +167,6 @@
             }
         }
 
-        private List<AccountsEntity> executeQueryWithParameter(String query, String paramName, String paramValue) {
-            try (Session session = getSessionFactory().openSession()) {
-                Query<AccountsEntity> hqlQuery = session.createQuery(query, AccountsEntity.class);
-                hqlQuery.setParameter(paramName, paramValue);
-                return hqlQuery.getResultList();
-            } catch (Exception e) {
-                System.out.println("Error retrieving categories: " + e);
-                throw new RuntimeException("Error executing query", e);
-            }
-        }
         private List<CategoryDTO> formatDateTimeInCategories(List<CategoriesEntity> categories) {
             return categories.stream()
                     .map(CategoryDTO::new)

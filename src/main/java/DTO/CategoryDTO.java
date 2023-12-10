@@ -1,7 +1,10 @@
 package DTO;
 import java.text.SimpleDateFormat;
+
+import lombok.Getter;
 import models.CategoriesEntity;
 
+@Getter
 public class CategoryDTO {
 
     private final CategoriesEntity category;
@@ -18,14 +21,5 @@ public class CategoryDTO {
         this.category = category;
         this.createdAtString = createdAtString;
         this.updatedAtString = updatedAtString;
-    }
-    public CategoriesEntity getCategory() {
-        return category;
-    }
-    public String getCreatedAtString() {
-        return createdAtString;
-    }
-    public String getUpdatedAtString() {
-        return updatedAtString;
     }
 }

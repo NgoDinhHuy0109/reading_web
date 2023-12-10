@@ -12,6 +12,12 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/category.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/main/readpage.jsp" value="file://$PROJECT_DIR$/src/main/webapp/main" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/news_page/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/news_page/header2.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/news_page/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/news_page/index_user.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/news_page/info_user.jsp" value="file://$PROJECT_DIR$/src/main/webapp/news_page" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/news_page/readpage.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>
   </component>
