@@ -2,6 +2,7 @@
 <%@ page import="Service.Article" %>
 <%@ page import="models.ArticlesEntity" %>
 <%@ page import="DTO.ArticleDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -56,9 +57,9 @@
             </div>
             <!-- .................../.. -->
             <div class="author_form">
-                <div class="left_author"><img src="https://scontent.fsgn5-8.fna.fbcdn.net/v/t39.30808-6/244517587_105687951892132_8038566585476487629_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHakrwAAfm3KKwzAoB1phbAc8fWGnRkts9zx9YadGS2z9EdIgBFn80kTG827UJMgu6DpnDN_VToeXcgVe51rBf3&_nc_ohc=Cz93sMuFm30AX_bvhug&_nc_ht=scontent.fsgn5-8.fna&oh=00_AfBHu2tzjRf1b76PhOCXIRkYy1rCsaYZsCaFDGfmBXXv4Q&oe=65495F00" alt=""></div>
+                <div class="left_author"><%=articleDTO.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%></div>
                 <div class="right_author">
-                    <a  href="https://www.facebook.com/profile.php?id=100073527816504" class="name_author">Huy Ga<i class="fa-solid fa-circle-check"></i></a>
+                    <a  href="https://www.facebook.com/profile.php?id=100073527816504" class="name_author"><%=articleDTO.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%><i class="fa-solid fa-circle-check"></i></a>
                     <div class="date_update">
                         <span><%= articleDTO.getUpdatedAtString() %></span>
                     </div>
@@ -142,34 +143,22 @@
         <!-- START phan ben phai bao gom xu huong va bao moi  -->
         <div class="container_article_right">
             <%
-
+                List<ArticleDTO> articlesDTO = new Article().getArticlesByCategoryID(articleDTO.getArticle().getCategory().getCategoryId());
+                for (ArticleDTO articleDTO1 : articlesDTO) {
+                    // Assuming you have an instance of Category available, replace 'categoryInstance' with your actual instance
+                    // Sử dụng giá trị categoryID ở đây để thực hiện các xử lý cần thiết
             %>
             <h3>New Article</h3>
             <br>
             <!-- .............. -->
             <div class="news_list_right">
-                <div class="left_article"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8170521_cover-thu-nghiem-intel-core-i5-14600k-tinhte.jpg" alt=""></div>
+                <div class="left_article"><%=articleDTO1.getArticle().getTitleImage()%></div>
                 <div class="right_article">
-                    <p>Thử nghiệm Intel Core i5-14600K - Cải thiện nhẹ hiệu năng so với Raptor Lake…</p>
+                    <p><%=articleDTO1.getArticle().getTitle()%></p>
 
                 </div>
             </div>
-            <!-- .............. -->
-            <div class="news_list_right">
-                <div class="left_article"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8170714_tinhte-apple4.jpg" alt=""></div>
-                <div class="right_article">
-                    <p>"Quay sự kiện bằng iPhone đẹp lắm", nhưng chỉ có iPhone thì liệu có đủ?…</p>
-
-                </div>
-            </div>
-            <!-- .............. -->
-            <div class="news_list_right">
-                <div class="left_article"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8170614_yamaha-mt-09-2024-30-cover.jpg" alt=""></div>
-                <div class="right_article">
-                    <p>Yamaha ra mắt MT-09 2024: Thay đổi đầu đèn và thêm vài nâng cấp nhỏ…</p>
-
-                </div>
-            </div>
+            <%}%>
             <!-- .............. -->
             <!-- end phan ben phai bao gom xu huong va bao moi  -->
 

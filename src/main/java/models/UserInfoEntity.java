@@ -26,7 +26,7 @@ public class UserInfoEntity implements Serializable{
     @Getter
     @Basic
     @Column(name = "dateofBirth", nullable = false)
-    private Long dateofBirth;
+    private Date dateofBirth;
     @Getter
     @Basic
     @Column(name = "email", nullable = false)
@@ -55,12 +55,13 @@ public class UserInfoEntity implements Serializable{
     @JoinColumn(name = "account_id", nullable = false)
     private AccountsEntity accountsEntity;
     public UserInfoEntity() {}
-    public UserInfoEntity(String fullName, Long dateofBirth, String email, String phoneNumber) {
+    public UserInfoEntity(String fullName, Date dateofBirth, String email, String phoneNumber, String userImage) {
         this.userInfoId = UUID.randomUUID();
         this.fullName = fullName;
         this.dateofBirth =dateofBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.userImage = userImage;
     }
 
     public void setUserInfoId(UUID userInfoId) {
@@ -71,7 +72,7 @@ public class UserInfoEntity implements Serializable{
         this.fullName = fullName;
     }
 
-    public void setDateofBirth(Long dateofBirth) {
+    public void setDateofBirth(Date dateofBirth) {
         this.dateofBirth = dateofBirth;
     }
 
@@ -102,7 +103,7 @@ public class UserInfoEntity implements Serializable{
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
-    public UserInfoEntity(String fullName, Long dateofBirth, String email, String phoneNumber, Long createdAt, Long updatedAt, Boolean isDeleted){
+    public UserInfoEntity(String fullName, Date dateofBirth, String email, String phoneNumber, Long createdAt, Long updatedAt, Boolean isDeleted){
         this.fullName = fullName;
         this.dateofBirth =dateofBirth;
         this.email = email;
@@ -111,7 +112,7 @@ public class UserInfoEntity implements Serializable{
         this.updatedAt = updatedAt;
         this.isDeleted = isDeleted;
     }
-    public UserInfoEntity(String fullName, Long dateofBirth, String email, String phoneNumber, Long createdAt, Long updatedAt, Boolean isDeleted, AccountsEntity accountsEntity){
+    public UserInfoEntity(String fullName, Date dateofBirth, String email, String phoneNumber, Long createdAt, Long updatedAt, Boolean isDeleted, AccountsEntity accountsEntity){
         this.fullName = fullName;
         this.dateofBirth =dateofBirth;
         this.email = email;

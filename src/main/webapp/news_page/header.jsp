@@ -28,7 +28,7 @@
                     <h2>${sessionScope.username}</h2>
                 </div>
                 <hr>
-                <a href="news_page/info_user.jsp" class="sub_menu_link">
+                <a href="./info_user.jsp" class="sub_menu_link">
                     <p>Personal Info</p>
                     <span>></span>
                 </a>

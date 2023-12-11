@@ -143,10 +143,11 @@ public class Article extends HibernateUtils {
             return null; // Return null in case of an error
         }
     }
-    public List<ArticlesEntity> getArticlesByCategoryID(UUID categoryID) {
+    public List<ArticleDTO> getArticlesByCategoryID(UUID categoryID) {
         try {
             String query = "SELECT a FROM ArticlesEntity a WHERE a.isDeleted = false AND a.category.categoryId = :categoryID";
-            return executeQueryWithParameter(query, "categoryID", categoryID);
+            List<ArticlesEntity> articles = executeQueryWithParameter(query, "categoryID", categoryID);
+            return formatDateTimeInArticles(articles);
         } catch (Exception error) {
             System.out.println("Error retrieving articles by category ID: " + error);
             return Collections.emptyList();

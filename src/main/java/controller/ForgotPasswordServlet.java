@@ -8,12 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import utils.cookie.CookieUtils;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import javax.mail.internet.InternetAddress;
 import java.io.IOException;
 import java.util.Properties;
-
-import static Service.OTPGenerator.generateOTP;
 
 @WebServlet(name = "ForgotPasswordServlet", urlPatterns = {"/ForgotPass"})
 public class ForgotPasswordServlet extends HttpServlet {
@@ -41,7 +40,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                     return;
                 }
                 otp = cookieUtils.getOTPSentToUserFromCookieOrStorage(request);
-                sendOTPEmail(email, otp);
+                sendMailToUser(email, otp);
             }
         } catch (Exception e) {
             // Handle exceptions more gracefully, redirect to an error page
@@ -50,46 +49,47 @@ public class ForgotPasswordServlet extends HttpServlet {
         getServletContext().getRequestDispatcher(url).forward(request, response);
         return;
     }
-    static final String fromEmail = "ngodinhhuy38@gmail.com";// Email người gửi
-    static final String password = "Ndh192003";
-    public static void sendOTPEmail(String toEmail, String otp) {
-        // Cấu hình thông tin email
-        // Mật khẩu email
-        String host = "smtp.gmail.com"; // Host của dịch vụ email (ví dụ: Gmail)
 
-        // Cấu hình properties
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com"); // Thay bằng SMTP server của bạn (ví dụ: smtp.gmail.com)
-        properties.put("mail.smtp.port", "587");
+    static final String fromEmail = "deahenry2k001@gmail.com";// Email người gửi
+    static final String password = "123456789Cc@";
+    private Properties prop;
+    private Session session;
 
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+    public void sendMailToUser(String email, String otp){
+        prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        // Creating a new session with an authenticator
+        session = Session.getInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
         });
 
-
         try {
-            // Tạo đối tượng MimeMessage
-            MimeMessage message = new MimeMessage(session);
+            // Create a default MimeMessage object
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(fromEmail)); // Use your actual sender's email address here
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); // 'email' is the recipient's email address
+            message.setSubject("Account Creation Successful for " + email);
 
-            // Thiết lập thông tin người gửi, người nhận và tiêu đề
-            message.setFrom(new InternetAddress(fromEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Your OTP for password reset");
+            // Create the content of the email
+            String content = "Dear,\n\n" +
+                    "Here is your otp.\n\n" + otp +
+                    "Best Regards,\n" +
+                    "TS Tech\n";
 
-            // Nội dung email (bao gồm mã OTP)
-            String emailContent = "Your OTP for password reset is: " + otp;
-            message.setText(emailContent);
-
-            // Gửi email
+            message.setText(content);
+            // Send message
             Transport.send(message);
-            System.out.println("Email sent successfully to " + toEmail);
+
+            System.out.println("Sent message successfully....");
+
         } catch (MessagingException e) {
             e.printStackTrace();
-            System.out.println("Failed to send email to " + toEmail);
         }
     }
     @Override

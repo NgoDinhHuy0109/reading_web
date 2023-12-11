@@ -1,5 +1,4 @@
 package controller;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,14 +8,15 @@ import models.AccountsEntity;
 import models.UserInfoEntity;
 import Service.Account;
 import Service.User;
-
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
     private final Account accountApplication = new Account(new AccountsEntity());
     private final User userApplication = new User(new UserInfoEntity());
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -31,26 +31,34 @@ public class RegisterServlet extends HttpServlet {
             if (action.equals("SignUp")) {
                 // Retrieve user inputs
                 String fullName = request.getParameter("fullName");
-                Long dateOfBirth = Long.valueOf(request.getParameter("dateOfBirth"));
+                String dobParameter = request.getParameter("dateOfBirth");
+                Date dateOfBirth = null;
+                try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    dateOfBirth = dateFormat.parse(dobParameter);
+                } catch (ParseException e) {
+                    // Handle the parsing exception appropriately
+                    e.printStackTrace(); // Log the exception or throw a ServletException
+                }
                 String email = request.getParameter("email");
                 String phoneNumber = request.getParameter("phoneNumber");
                 String userName = request.getParameter("userName");
                 String password = request.getParameter("password");
-
+                String userImage = request.getParameter("titleImg");
                 // Validate inputs
                 if (userApplication.isEmailExists(email)) {
                     // Handle case where email already exists
                     url = "/sign_up_error.jsp";
                     request.setAttribute("error", "Email already exists");
-                    //
-                    //return;
+                    getServletContext().getRequestDispatcher(url).forward(request, response);
+                    return;
                 }
                 if (userApplication.isPhoneNumberExists(phoneNumber)) {
                     // Handle case where email already exists
                     url = "/sign_up_error.jsp";
                     request.setAttribute("error1", "Phone number already exists");
-                    //getServletContext().getRequestDispatcher(url).forward(request, response);
-                    //return;
+                    getServletContext().getRequestDispatcher(url).forward(request, response);
+                    return;
                 }
                 if (accountApplication.isAccountExists(userName)) {
                     // Handle case where email already exists
@@ -62,7 +70,7 @@ public class RegisterServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher(url).forward(request, response);
                 // Add more specific validation as needed
                 // Create UserInfoEntity and AccountsEntity
-                UserInfoEntity userInfosEntity = new UserInfoEntity(fullName, dateOfBirth, email, phoneNumber);
+                UserInfoEntity userInfosEntity = new UserInfoEntity(fullName, dateOfBirth, email, phoneNumber,userImage);
                 AccountsEntity accountsEntity = new AccountsEntity(userName, password);
                 try {
                     // Create user account
@@ -83,7 +91,6 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
         }
     }
-
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
@@ -92,3 +99,4 @@ public class RegisterServlet extends HttpServlet {
 
     }
 }
+

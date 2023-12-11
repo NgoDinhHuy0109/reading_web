@@ -26,7 +26,7 @@ public class TestData {
 //            HibernateUtils hibernateUtils = new HibernateUtils(item);
 //            hibernateUtils.saveEntity();
 //        }
-        getArticleByCateID();
+        //getArticleByCateID();
 
     }
 
@@ -39,10 +39,5 @@ public class TestData {
         hibernateUtils.saveEntity();
     }
 
-    public static void getArticleByCateID() {
-       Article userservice = new Article();
-       ArticlesEntity userInfo = new ArticlesEntity();
-       userInfo= (ArticlesEntity) userservice.getArticlesByCategoryID(UUID.fromString("bb2b8272-44cb-4c7b-b20e-6c41a5b898a0"));
-       System.out.println(userInfo.getTitle());
-    }
+
 }
