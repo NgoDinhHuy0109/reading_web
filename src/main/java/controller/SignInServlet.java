@@ -71,12 +71,13 @@ public class SignInServlet extends HttpServlet {
 
                             }
                             String jSessionId = session.getId();
+
                             List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
 
                             session.setAttribute("JSESSIONID", jSessionId);
                             for (UserDTO user : userList)
                             {
-                                session.setAttribute("username", user.getUserInfo().getFullName());
+                                session.setAttribute("fullName", user.getUserInfo().getFullName());
                             }
                             //check role
                             if(RoleString.admin.equals(accounts.getRole()))

@@ -10,11 +10,12 @@
 </head>
 <body>
     <div class="box">
-        <form>
+        <form action="ForgotPass" method="post">
+            <input type="hidden" name="action" value="EnterOtp">
             <h2>Your authentication code<h2>
             <p></p>
             <div class="inputBox">
-                <input type="text" required>
+                <input type="text" name="otp" required>
                 <span>Enter Code</span>
                 <i></i>
             </div>

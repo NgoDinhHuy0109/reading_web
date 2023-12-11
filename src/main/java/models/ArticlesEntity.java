@@ -50,21 +50,19 @@ public class ArticlesEntity implements Serializable{
     private AccountsEntity account;
     @OneToMany(mappedBy = "article")
     private Collection<InteractionsEntity> listInteraction;
+    @OneToMany(mappedBy = "article")
+    private Collection<CommentsEntity> listComment;
     public ArticlesEntity() {
     }
-
     public void setArticleId(UUID articleId) {
         this.articleId = articleId;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
-
     public void setContent(String content) {
         this.content = content;
     }
-
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
@@ -111,7 +109,8 @@ public class ArticlesEntity implements Serializable{
 
     public Collection<InteractionsEntity> getInteractionsByInteractionId(){return listInteraction;}
     public void setInteractionsByInteractionId(Collection<InteractionsEntity> interactionsByInteractionId){this. listInteraction= interactionsByInteractionId;}
-
+    public Collection<CommentsEntity> getCommentsByCommentId(){return listComment;}
+    public void setCommentsByCommentId(Collection<CommentsEntity> commentsByCommentId){this.listComment = commentsByCommentId;}
     @Override
     public int hashCode() {
         return Objects.hash(articleId,title,content, createdAt, updatedAt, isDeleted);

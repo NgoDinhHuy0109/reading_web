@@ -46,6 +46,9 @@ public class  AccountsEntity implements Serializable  {
     @Getter
     @OneToOne(mappedBy = "accountRequest")
     private RequestsEntity requestsEntity;
+    @Getter
+    @OneToMany(mappedBy = "account")
+    private Collection<CommentsEntity> listComment;
     public AccountsEntity(String userName){this.userName = userName;}
 
     public AccountsEntity() {

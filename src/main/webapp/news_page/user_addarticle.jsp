@@ -21,7 +21,7 @@
     <title>Create New Article</title>
 </head>
 <body>
-<jsp:include page="/news_page/header_user.jsp"/>
+<jsp:include page="/news_page/header.jsp"/>
 <div class="container_addpost">
     <h1 class="create_article">Create Article</h1>
     <hr>

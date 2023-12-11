@@ -1,13 +1,4 @@
-let subMenu = document.getElementById("subMenu");
-function toggleMenu() {
-    subMenu.classList.toggle("open_menu");
-}
-document.addEventListener("click", function (event) {
-    if (!subMenu.contains(event.target) && event.target !== document.querySelector(".user_pic")) {
-        // Kiểm tra nếu người dùng click ra ngoài menu hoặc không phải là phần tử ".user_pic"
-        subMenu.classList.remove("open_menu"); // Đóng menu
-    }
-});
+
 document.getElementById("pop_up").addEventListener("click", function () {
     popUp.style.display = "flex";
     document.body.style.overflow = 'hidden'; // Vô hiệu hóa cuộn trang

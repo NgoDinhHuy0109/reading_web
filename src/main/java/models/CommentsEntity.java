@@ -1,7 +1,6 @@
 package models;
 import jakarta.persistence.*;
 import lombok.Getter;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
@@ -17,7 +16,7 @@ public class CommentsEntity implements Serializable{
     private UUID commentId;
     @Getter
     @Basic
-    @Column(name = "content", nullable = false, unique = true)
+    @Column(name = "content", nullable = false)
     private String content;
     @Getter
     @Basic
@@ -32,9 +31,16 @@ public class CommentsEntity implements Serializable{
     @Column(name = "isDeleted", nullable = false)
     private Boolean isDeleted;
     @OneToOne
-    @JoinColumn(name = "interaction_id", nullable = false)
+    @JoinColumn(name = "interaction_id")
     private InteractionsEntity interaction;
-
+    @Getter
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    private ArticlesEntity article;
+    @Getter
+    @ManyToOne
+    @JoinColumn(name = "account_id", nullable = false)
+    private AccountsEntity account;
     public void setCommentId(UUID commentId){this.commentId = commentId;}
 
     public void setContent(String content) {this.content = content;}
@@ -50,9 +56,12 @@ public class CommentsEntity implements Serializable{
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-
-
-    public CommentsEntity(){}
+    public CommentsEntity()
+    {}
+    public CommentsEntity(String content){
+        this.commentId =UUID.randomUUID();
+        this.content = content;
+    }
     public CommentsEntity(String content,Long createdAt, Long updatedAt, Boolean isDeleted){
         this.content = content;
         this.createdAt = createdAt;
@@ -83,6 +92,15 @@ public class CommentsEntity implements Serializable{
                 ", updatedAt='" + (updatedAt != null ? dateFormat.format(updatedAt) : null) + '\'' +
                 ", isDeleted='" + isDeleted + '\'' +
                 '}';
+    }
+    public void setInteractionsEntity(InteractionsEntity interaction){
+        this.interaction = interaction;
+    }
+    public void setArticlesEntity(ArticlesEntity article){
+        this.article = article;
+    }
+    public void setAccountsEntity(AccountsEntity account){
+        this.account = account;
     }
 
 }

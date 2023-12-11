@@ -49,16 +49,13 @@ public class MainArticleServlet extends HttpServlet {
                 String[] contentArray = request.getParameterValues("editorContent");
                 String content = (contentArray != null && contentArray.length > 0) ? contentArray[0] : "";
                 if (session != null && !session.isNew()) {
-                    // Retrieve the attribute
-                    //UserInfoEntity obj = (UserInfoEntity) session.getAttribute("UserInformation");
-                    //UserInfoEntity UserInformation = null;
-                    //if (obj != null)
-                    //    UserInformation = (UserInfoEntity) obj;
-                    //assert UserInformation != null;
-                    //UUID author = UUID.fromString(String.valueOf(UserInformation.getAccountsEntity()));
-                    UUID author = UUID.fromString("a0488dd9-55ea-4f68-bcdd-4e8a8c973b45");
-                    ArticlesEntity articlesEntity = new ArticlesEntity(title, titleImage, content);
-                    articleApplication.createArticle(articlesEntity, category1, author);
+                    List<UserDTO> userList = (List<UserDTO>) session.getAttribute("UserInformation");
+                    for(UserDTO user : userList)
+                    {
+                        String author = String.valueOf(user.getUserInfo().getAccountsEntity().getAccountId());
+                        ArticlesEntity articlesEntity = new ArticlesEntity(title, titleImage, content);
+                        articleApplication.createArticle(articlesEntity, category1, UUID.fromString(author));
+                    }
                     // Rest of the code...
                 }
             }

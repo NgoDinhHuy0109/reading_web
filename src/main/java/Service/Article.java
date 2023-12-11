@@ -153,6 +153,16 @@ public class Article extends HibernateUtils {
             return Collections.emptyList();
         }
     }
+    public List<ArticleDTO> getArticlesByUserID(UUID userID) {
+        try {
+            String query = "SELECT a FROM ArticlesEntity a WHERE a.isDeleted = false AND a.account.accountId = :accountId";
+            List<ArticlesEntity> articles = executeQueryWithParameter(query, "accountId", userID);
+            return formatDateTimeInArticles(articles);
+        } catch (Exception error) {
+            System.out.println("Error retrieving articles by category ID: " + error);
+            return Collections.emptyList();
+        }
+    }
 
     private List<ArticlesEntity> executeQueryWithParameter(String query, String paramName, UUID paramValue) {
         try (Session session = getSessionFactory().openSession()) {

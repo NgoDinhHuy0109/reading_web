@@ -5,6 +5,11 @@
     box-sizing: border-box;
     font-family:'Arial', sans-serif;
 }
+#redHeart {
+    color: red; /* Đổi màu nền của trái tim thành màu đỏ */
+    font-size: 25px;
+    margin-right: 2px;
+}
 :root {
     --light: #f6f6f9;
     --primary: #1976D2;

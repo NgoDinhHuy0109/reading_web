@@ -85,10 +85,10 @@
                     </tr>
                     <% } %>
                 </table>
+            </div>
                 <% } else { %>
                 <p>No articles available.</p>
                 <% } %>
-            </div>
         </div>
     </main>
     <script src="script_article.js"></script>

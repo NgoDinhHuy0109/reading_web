@@ -57,6 +57,13 @@
     background-color: #eac45c;
     transition: var(--smooth);
 }
+.fa-solid.fa-caret-down {
+    font-size: 30px; /* Đổi kích thước thành 24px hoặc kích thước mong muốn */
+    color: white; /* Màu sắc của icon */
+    margin-left: 10px;
+    transition: transform 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+
+}
 .navbar_btn{
     text-align: center;
     color: #fff;

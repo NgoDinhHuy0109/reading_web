@@ -3,6 +3,10 @@
 <%@ page import="models.ArticlesEntity" %>
 <%@ page import="DTO.ArticleDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="DTO.UserDTO" %>
+<%@ page import="models.CommentsEntity" %>
+<%@ page import="Service.Comment" %>
+<%@ page import="DTO.CommentDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -73,7 +77,7 @@
                 <div class="emotion_left">
                     <div class="total_reactions">
                         <div class="icon_emotion ">
-                            <img width="30px" src="images/heart.png" alt="Thích">
+                            <i class="fa-solid fa-heart"  id="redHeart"></i>
                             <span>12</span>
                         </div>
                     </div>
@@ -103,52 +107,89 @@
 
             <!-- START PHAN VIET COMMENT  -->
             <div class="cmt_form">
+                <%
+                    // Lấy thông tin từ form
+                    String articleIdParam = request.getParameter("articleId");
+                    String commentText = request.getParameter("comment");
+                    // Kiểm tra xem dữ liệu có hợp lệ không
+                    if (articleIdParam != null && commentText != null && !commentText.isEmpty()) {
+                        if (session != null && session.getAttribute("UserInformation") != null) {
+                            List<UserDTO> userList = (List<UserDTO>) session.getAttribute("UserInformation");
+                            for (UserDTO user : userList) {
+                                String author = String.valueOf(user.getUserInfo().getAccountsEntity().getAccountId());
+                                // Tạo một comment entity
+                                CommentsEntity comment = new CommentsEntity(commentText);
+                                Comment comment1 = new Comment();
+                                // Gửi comment đi (assumed method)
+                                // Hãy thay thế method này bằng phương thức thực tế trong ứng dụng của bạn
+                                comment1.createComment(comment, UUID.fromString(articleIdParam), UUID.fromString(author));
+                            }
+                        }
+                    }
+                %>
                 <div class="leftcmt_form">
-                    <img alt="chien_2k3" src="https://scontent.fsgn5-13.fna.fbcdn.net/v/t39.30808-6/327191139_563957622275677_5403034852511935724_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHh8rlL3wZb0EFrXzfSQqK5w0qPGOIvWiDDSo8Y4i9aID9Y4YRDFYtpLQDWfLbQYvWAeOxaoMFGMSgoXked0BuZ&_nc_ohc=1S74QODH3owAX8plHzN&_nc_ht=scontent.fsgn5-13.fna&oh=00_AfCgqHWmamW9bXBuZmDUnKofo0AQnYCe7xWbIgwcmpHUUg&oe=654F158B">
+                    <%
+                        List<UserDTO> userList = (List<UserDTO>) session.getAttribute("UserInformation");
+                        for (UserDTO user : userList) {
+                        %>
+                            <%=user.getUserInfo().getUserImage()%>
+                        <%}
+                    %>
                 </div>
                 <div class="rightcmt_form">
-                    <input type="text" placeholder="Please enter your commnet...." name="categoryName"
-                           required><br>
-                    <a href="#footer"><button>SEND</button></a>
-
+                    <form method="post">
+                        <input type="hidden" name="action" value="createCMT">
+                        <input type="hidden" name="articleId" value="<%= articleId %>">
+                        <input type="text" placeholder="Please enter your comment..." name="comment" required><br>
+                        <button type="submit">Send</button>
+                    </form>
                 </div>
 
             </div>
             <!--END PHAN VIET COMMENT  -->
 
             <!-- START hien thi COMMENT  -->
+            <%
+                List<CommentDTO> commentsDTO = new Comment().getCommentsByArticleId(articleId);
+                for (CommentDTO commentDTO : commentsDTO) {
+            %>
             <div class="cmt_form">
+
                 <div class="leftcmt_form">
-                    <img alt="chien_2k3" src="https://scontent.fsgn5-13.fna.fbcdn.net/v/t39.30808-6/327191139_563957622275677_5403034852511935724_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHh8rlL3wZb0EFrXzfSQqK5w0qPGOIvWiDDSo8Y4i9aID9Y4YRDFYtpLQDWfLbQYvWAeOxaoMFGMSgoXked0BuZ&_nc_ohc=1S74QODH3owAX8plHzN&_nc_ht=scontent.fsgn5-13.fna&oh=00_AfCgqHWmamW9bXBuZmDUnKofo0AQnYCe7xWbIgwcmpHUUg&oe=654F158B">
+                    <%=commentDTO.getComment().getAccount().getUserInfoEntityId().getUserImage()%>
                 </div>
                 <div class="righttlcmt_form">
                     <div class="tl_cmt">
                         <div class="name_author">
-                            <a href="https://www.facebook.com/profile.php?id=100073527816504"><p>Minh Chiến</p></a>
+                            <a href="https://www.facebook.com/profile.php?id=100073527816504"><p><%=commentDTO.getComment().getAccount().getUserInfoEntityId().getFullName()%></p></a>
                         </div>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab et consequuntur a ipsum, incidunt, commodi praesentium quo sit ipsa provident similique vero dolor ad nihil placeat distinctio. Consequuntur, minus laboriosam? fgfdgfgfdggggggggggggggggggggggggggggggggg</p>
+                        <p><%=commentDTO.getComment().getContent()%></p>
                     </div>
                     <div class="tuongtac_cmt">
                         <i class="fa-regular fa-heart" id="heartIconTuongTac"></i><span>Love</span>
                     </div>
                 </div>
+
             </div>
+            <%
+                }
+            %>
             <!--END PHAN hien thi  COMMENT  -->
 
             <!-- LINH TINH -->
-
         </div>
         <!-- end phan ben TRAI PHAN DOC BAO   -->
 
         <!-- START phan ben phai bao gom xu huong va bao moi  -->
         <div class="container_article_right">
+            <h3>Aritcle by Category</h3>
             <%
                 List<ArticleDTO> articlesDTO = new Article().getArticlesByCategoryID(articleDTO.getArticle().getCategory().getCategoryId());
                 for (ArticleDTO articleDTO1 : articlesDTO) {
                     // Assuming you have an instance of Category available, replace 'categoryInstance' with your actual instance
                     // Sử dụng giá trị categoryID ở đây để thực hiện các xử lý cần thiết
             %>
-            <h3>New Article</h3>
+
             <br>
             <!-- .............. -->
             <div class="news_list_right">

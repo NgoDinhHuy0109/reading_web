@@ -39,7 +39,7 @@
                 for (CategoryDTO category : categories) {
             %>
             <li>
-                <a href="view_category.jsp?categoryID=<%=category.getCategory().getCategoryId()%>"></a>
+                <a href="news_page/index_category.jsp?categoryID=<%=category.getCategory().getCategoryId()%>"></a>
                 <%= category.getCategory().getCategoryName() %>
             </li>
             <%
@@ -67,7 +67,7 @@
         </div>
         <div class="bottom">
             <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>&category_Name=<%=article.getArticle().getCategory().getCategoryName()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
-            <a href="news_page/info_user_lock.jsp" rel="noreferrer" class="jsx-1509373995">
+            <a href="news_page/info_user_lock.jsp?username=<%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%>" rel="noreferrer" class="jsx-1509373995">
                 <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
                 <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%>
                 </span>
@@ -163,7 +163,6 @@
     %>
 </div>
 <jsp:include page="/news_page/footer.jsp"/>
-<script src="news_page/script.js"></script>
 <script src="https://unpkg.com/@xylphid/resizable/index.js"></script>
 <script>
     document.querySelector('.select-image').addEventListener('click', function () {
@@ -188,6 +187,18 @@
             alert("Image size more than 2MB");
         }
     })
+</script>
+<script>
+    let subMenu = document.getElementById("subMenu");
+    function toggleMenu() {
+        subMenu.classList.toggle("open_menu");
+    }
+    document.addEventListener("click", function (event) {
+        if (!subMenu.contains(event.target) && event.target !== document.querySelector("#user_pic")) {
+            // Kiểm tra nếu người dùng click ra ngoài menu hoặc không phải là phần tử ".user_pic"
+            subMenu.classList.remove("open_menu"); // Đóng menu
+        }
+    });
 </script>
 </body>
 </html>

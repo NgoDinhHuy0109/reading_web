@@ -41,7 +41,10 @@ public class ForgotPasswordServlet extends HttpServlet {
                 }
                 otp = cookieUtils.getOTPSentToUserFromCookieOrStorage(request);
                 sendMailToUser(email, otp);
+                url = "/nhap_otp.jsp";
+
             }
+
         } catch (Exception e) {
             // Handle exceptions more gracefully, redirect to an error page
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
@@ -50,8 +53,8 @@ public class ForgotPasswordServlet extends HttpServlet {
         return;
     }
 
-    static final String fromEmail = "deahenry2k001@gmail.com";// Email người gửi
-    static final String password = "123456789Cc@";
+    static final String fromEmail = "trongvumaimtv@gmail.com";// Email người gửi
+    static final String password = "klfnasnzxuvnkddy";
     private Properties prop;
     private Session session;
 

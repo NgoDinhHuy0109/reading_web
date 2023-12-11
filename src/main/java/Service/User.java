@@ -102,4 +102,28 @@ public class   User extends HibernateUtils {
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
+
+    public UserInfoEntity getUser(String fullName) {
+        try {
+            String query = "FROM UserInfoEntity WHERE isDeleted = false and fullName = :fullName";
+            return executeQuerysWithParameter(query, "fullName", fullName)
+                    .stream()
+                    .findFirst()
+                    .orElse(null);
+        } catch (Exception error) {
+            // Log the error instead of printing to the console
+            System.out.println("Error retrieving categories: " + error);
+            throw new RuntimeException("Error retrieving account", error);
+        }
+    }
+    private List<UserInfoEntity> executeQuerysWithParameter(String query, String paramName, String paramValue) {
+        try (Session session = getSessionFactory().openSession()) {
+            Query<UserInfoEntity> hqlQuery = session.createQuery(query, UserInfoEntity.class);
+            hqlQuery.setParameter(paramName, paramValue);
+            return hqlQuery.getResultList();
+        } catch (Exception e) {
+            System.out.println("Error retrieving categories: " + e);
+            throw new RuntimeException("Error executing query", e);
+        }
+    }
 }
