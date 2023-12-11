@@ -38,7 +38,7 @@
                 for (CategoryDTO category : categories) {
             %>
             <li>
-                <a href="view_category.jsp?categoryID=<%=category.getCategory().getCategoryId()%>"></a>
+                <a href="news_page/index_category.jsp?categoryID=<%=category.getCategory().getCategoryId()%>"></a>
                 <%= category.getCategory().getCategoryName() %>
             </li>
             <%
@@ -65,10 +65,10 @@
             <%=article.getArticle().getTitleImage()%>
         </div>
         <div class="bottom">
-            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">
+            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>&category_Name=<%=article.getArticle().getCategory().getCategoryName()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
+            <a href="news_page/info_user_lock.jsp?username=<%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%>" rel="noreferrer" class="jsx-1509373995">
+                <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
+                <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%>
                 </span>
             </a>
         </div>
@@ -80,9 +80,9 @@
         </div>
         <div class="bottom_2">
             <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
+            <a href="news_page/info_user_lock.jsp" rel="noreferrer" class="jsx-1509373995">
+                <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
+                <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%></span>
             </a>
         </div>
     </div>
@@ -138,66 +138,30 @@
     </div>
 </div>
 <div class="list_container">
+    <%
+        User user = new User(); // Khởi tạo một đối tượng User
+
+        // Lấy danh sách tất cả các bài báo, sắp xếp theo ngày đăng giảm dần
+        List<ArticleDTO> articleDTO = new Article().getAllArticles();
+
+        // Biến đếm để phân loại bài báo
+        for (ArticleDTO article : articleDTO) {
+    %>
     <div class="news_list">
-        <div class="left"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168401_vlcsnap-2023-10-30-13h43m04s600.jpg"
-                alt=""></div>
+        <div class="left"><%=article.getArticle().getTitleImage()%></div>
         <div class="right">
-            <h3>Đánh giá Alan Wake II: Game kinh dị này sẽ giữ chân anh em vì cốt truyện quá đẳng cấp</h3>
-            <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
+            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
+            <a href="news_page/info_user_lock.jsp" rel="noreferrer" class="jsx-1509373995">
+                <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
+                <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%></span>
             </a>
         </div>
     </div>
-    <div class="news_list">
-        <div class="left"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168401_vlcsnap-2023-10-30-13h43m04s600.jpg"
-                alt=""></div>
-        <div class="right">
-            <h3>Đánh giá Alan Wake II: Game kinh dị này sẽ giữ chân anh em vì cốt truyện quá đẳng cấp</h3>
-            <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
-    <div class="news_list">
-        <div class="left"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168401_vlcsnap-2023-10-30-13h43m04s600.jpg"
-                alt=""></div>
-        <div class="right">
-            <h3>Đánh giá Alan Wake II: Game kinh dị này sẽ giữ chân anh em vì cốt truyện quá đẳng cấp. Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</h3>
-            <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
-    <div class="news_list">
-        <div class="left"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168401_vlcsnap-2023-10-30-13h43m04s600.jpg"
-                alt=""></div>
-        <div class="right">
-            <h3>Đánh giá Alan Wake II: Game kinh dị này sẽ giữ chân anh em vì cốt truyện quá đẳng cấp</h3>
-            <p>Thế giới game bây giờ, vì áp lực doanh thu của những tập đoàn, nên chúng ta có ba kiểu làm phần kế tiếp
-                cho một trò chơi ăn khách. Thứ nhất là tính toán trước cốt truyện, làm xong phần này …</p>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W.sadhbashdhsabjh</span>
-            </a>
-        </div>
-    </div>
+    <%
+        }
+    %>
 </div>
 <jsp:include page="/news_page/footer.jsp"/>
-<script src="news_page/script.js"></script>
 <script src="https://unpkg.com/@xylphid/resizable/index.js"></script>
 <script>
     document.querySelector('.select-image').addEventListener('click', function () {
@@ -222,6 +186,18 @@
             alert("Image size more than 2MB");
         }
     })
+</script>
+<script>
+    let subMenu = document.getElementById("subMenu");
+    function toggleMenu() {
+        subMenu.classList.toggle("open_menu");
+    }
+    document.addEventListener("click", function (event) {
+        if (!subMenu.contains(event.target) && event.target !== document.querySelector("#user_pic")) {
+            // Kiểm tra nếu người dùng click ra ngoài menu hoặc không phải là phần tử ".user_pic"
+            subMenu.classList.remove("open_menu"); // Đóng menu
+        }
+    });
 </script>
 </body>
 </html>
