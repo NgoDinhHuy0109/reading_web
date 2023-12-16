@@ -8,16 +8,13 @@ import org.hibernate.query.Query;
 import utils.HibernateUtils;
 import java.util.*;
 import java.util.stream.Collectors;
-
 public class Account extends HibernateUtils {
     public Account() {
         super(new AccountsEntity());
     }
-
     public Account(AccountsEntity object) {
         super(object);
     }
-
     public void save() {
         Gson responseJson = new Gson();
         try {
@@ -26,18 +23,15 @@ public class Account extends HibernateUtils {
             System.out.println(error);
         }
     }
-
     public void createAccounts(AccountsEntity newAcc) {
         try {
             UUID newAccId = UUID.randomUUID();
             newAcc.setAccountId(newAccId);
-
             Long current = System.currentTimeMillis();
             newAcc.setRole(RoleString.reader);
             newAcc.setCreatedAt(current);
             newAcc.setUpdatedAt(current);
             newAcc.setDeleted(false);
-
             Account account = new Account(newAcc);
             account.save();
         } catch (Exception error) {

@@ -18,6 +18,7 @@ public class OTPGenerator {
 
         return otp.toString();
     }
+
     public static String encodeOTP(String otp) {
         byte[] encodedBytes = Base64.getEncoder().encode(otp.getBytes());
         return new String(encodedBytes);

@@ -3,9 +3,7 @@ package DTO;
 import lombok.Getter;
 import models.CategoriesEntity;
 import models.UserInfoEntity;
-
 import java.text.SimpleDateFormat;
-
 @Getter
 public class UserDTO {
     private final UserInfoEntity userInfo;

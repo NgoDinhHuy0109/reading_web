@@ -16,23 +16,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
     <title>Read Page</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <!-- Thêm thư viện Font Awesome vào trang của bạn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
     <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="style_readpage_update.css">
-
 </head>
-
 <body>
-<!--START _ HEADER-HEADER-HEADER-HEADER-HEADER -->
-<jsp:include page="header.jsp"/>
-<!--END _ HEADER-HEADER-HEADER-HEADER-HEADER -->
-
-<!-- START BAI BAO BEN TRAI  -->
+<jsp:include page="/news_page/header_user.jsp"/>
 <div class="main_article">  <!-- /*phan nen mau xam to ben ngoai*/ -->
     <div class="container_article">  <!-- phan ben trong nen mau trang bao  -->
         <%
@@ -94,8 +85,6 @@
                         <i class="fa-regular fa-heart" id="heartIcon"></i><span>Love</span>
                     </button>
                 </div>
-
-
                 <div class="love_emotion">
                     <button class="love_btn">
                         <i class="fa-regular fa-comment"></i><span>Comment</span>
@@ -174,13 +163,7 @@
             <%
                 }
             %>
-            <!--END PHAN hien thi  COMMENT  -->
-
-            <!-- LINH TINH -->
         </div>
-        <!-- end phan ben TRAI PHAN DOC BAO   -->
-
-        <!-- START phan ben phai bao gom xu huong va bao moi  -->
         <div class="container_article_right">
             <h3>Aritcle by Category</h3>
             <%
@@ -195,8 +178,7 @@
             <div class="news_list_right">
                 <div class="left_article"><%=articleDTO1.getArticle().getTitleImage()%></div>
                 <div class="right_article">
-                    <p><%=articleDTO1.getArticle().getTitle()%></p>
-
+                    <a href="./readpage.jsp?article_ID=<%=articleDTO1.getArticle().getArticleId()%>"><h3><%=articleDTO1.getArticle().getTitle()%></h3></a>
                 </div>
             </div>
             <%}%>

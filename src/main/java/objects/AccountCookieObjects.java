@@ -1,7 +1,5 @@
 package objects;
-
 import lombok.*;
-
 import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,5 +9,4 @@ import java.util.UUID;
 public class AccountCookieObjects {
     private UUID accountId;
     private String role;
-
 }

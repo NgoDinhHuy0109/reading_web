@@ -1,7 +1,6 @@
 package models;
 import jakarta.persistence.*;
 import lombok.Getter;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Collection;

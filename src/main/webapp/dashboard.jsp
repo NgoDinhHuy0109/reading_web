@@ -1,12 +1,20 @@
 <%@ page import="DTO.UserDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ page import="Service.Category" %>
+<%@ page import="Service.*" %>
 <%@ page import="models.CategoriesEntity" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.UUID" %>
-<%@ page import="DTO.CategoryDTO" %>
+<%@ page import="DTO.*" %>
+<%
+    Category categoryService = new Category();
+    long totalCategories = categoryService.countCategories();
+    Article articleService = new Article();
+    long totalArticles = articleService.countArticles();
+    User userService = new User();
+    long totalUsers = userService.countUsers();
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +48,7 @@
                         <a href="cate_home.jsp"><h3 class="name_left">Total Categories</h3></a>
                     </div>
                     <div class="progresss">
-                        <h3 class="name_right">20</h3>
+                        <h3 class="name_right"><%= totalCategories %></h3>
                     </div>
                 </div>
             </div>
@@ -50,7 +58,7 @@
                         <a href="article_home.jsp"><h3 class="name_left">Total Articles</h3></a>
                     </div>
                     <div class="progresss">
-                        <h3 class="name_right">20</h3>
+                        <h3 class="name_right"><%= totalArticles %></h3>
                     </div>
                 </div>
             </div>
@@ -61,7 +69,7 @@
                         <a href=""><h3 class="name_left">Total Users</h3></a>
                     </div>
                     <div class="progresss">
-                        <h3 class="name_right">20</h3>
+                        <h3 class="name_right"><%= totalUsers %></h3>
                     </div>
                 </div>
             </div>

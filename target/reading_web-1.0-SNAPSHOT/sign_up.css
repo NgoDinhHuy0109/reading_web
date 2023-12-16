@@ -4,6 +4,53 @@
     box-sizing: border-box;
     font-family:'Arial', sans-serif;
 }
+
+:root {
+    --light: #f6f6f9;
+    --primary: #1976D2;
+    --light-primary: #CFE8FF;
+    --grey: #eee;
+    --dark-grey: #AAAAAA;
+    --dark: #363949;
+
+    --light-danger: #FECDD3;
+    --warning: #FBC02D;
+    --light-warning: #FFF2C6;
+    --success: #388E3C;
+    --light-success: #BBF7D0;
+    /* ............. */
+    --color-primary: #6C9BCF;
+    --pink: #FF99CC;
+    --color-danger: #FF0060;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    --green: #54B192;
+    /* Moi khi nguoi dung re chuot qua elemetn se nhat di */
+    --green-l:#A4CEC0;
+    --gray: #3F3D56;
+    --Green: #009900;
+    --Red: #FF0000;
+    --orange: #fa5652;
+    --light-pink: #fff9f9;
+    --shadow: 0 20px 60px 0 rgba(167, 56, 80, 0.2);
+    --linear-gradient: linear-gradient(45deg, #f06, #3cf, #f06);
+    --smooth: all .3s ease-in;
+}
 body{
     display: flex;
     justify-content: center;
@@ -11,19 +58,29 @@ body{
     min-height: 100vh;
     background: #B4B4B3;
 }
+/* day la box cha  */
 .box{
     position: relative;
-    width: 380px;
-    height: 750px;
+    width: 720px;
+    height: 630px;
     background: #1c1c1c;
     border-radius: 8px;
     overflow: hidden;
 }
-.error-message {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
+/* day la box chua hai form de dispalyfelx hang ngang hai form */
+.box_container{
+    width: 718px;
+    height: 630px;
+    inset: 4px;
+    background: #222;
+    padding: 5px 4px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
 }
+
+
 @keyframes alternateAnimate {
     0% {
         transform: rotate(0deg) scale(1);
@@ -42,7 +99,7 @@ body{
     position: absolute;
     top: -50%;
     left: -50%;
-    width: 380px;
+    width: 600px;
     height: 420px;
     background: linear-gradient(0deg, transparent, transparent, #e0ac1c,#e0ac1c,#e0ac1c);
     z-index: 1;
@@ -53,42 +110,62 @@ body{
 .box::after {
     animation-delay: -3s;
 }
-
-.box form{
-    position: absolute;
+/* style hai form trai phai */
+.box .left_form {
     inset: 4px;
     background: #222;
-    padding: 20px 40px;
-    border-radius: 8px;
+    padding-top: 15px;
+    padding-left: 40px;
+    padding-bottom: 40px;
     z-index: 2;
     display: flex;
     flex-direction: column;
+    width: 60%;
+
 }
-.box form h2{
-    font-weight:bold ;
-    text-align: center;
+
+.box .right_form{
+    inset: 4px;
+    background: #222;
+    padding-top: 40px;
+    padding-right: 40px;
+    padding-left: 10px;
+    padding-bottom: 40px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+/* style hai form trai phai */
+
+/* style form ben trai */
+.box .left_form h2{
+    font-weight: bold;
+    font-size: 30px;
+    text-align: right;
     letter-spacing: 0.1rem;
     color: #e0ac1c;
 }
-.box form .inputBox{
+.box .left_form .inputBox{
     position: relative;
     width: 300px;
     margin-top: 35px;
 }
-.box form .inputBox input{
+.box .left_form .inputBox input[type="text"]{
     position : relative;
     width: 100%;
     padding: 20px 10px 10px;
     background: transparent;
     outline: none;
     box-shadow: none;
-    color:#23242a ;
+    color:#000000 ;
     font-size: 1em;
     letter-spacing: 0.05em;
     transition: 0.5s;
     z-index: 10;
+    height: 40px;
 }
-.box form .inputBox span{
+.box .left_form .inputBox span{
     position: absolute;
     left: 0;
     padding: 20px 3px 10px;
@@ -98,14 +175,14 @@ body{
     letter-spacing: 0.05em;
     transition: 0.5s;
 }
-.box form .inputBox input:valid ~ span,
-.box form .inputBox input:focus ~ span 
+.box .left_form .inputBox input:valid ~ span,
+.box .left_form .inputBox input:focus ~ span
 {
     color: #fff;
     font-size: 0.75em;
     transform: translateY(-34px);
 }
-.box form .inputBox i {
+.box .left_form .inputBox i {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -117,15 +194,15 @@ body{
     transition: 0.5s;
     pointer-events: none;
 }
-.box form .inputBox input:valid ~ i,
+.box .left_form .inputBox input:valid ~ i,
 .box form .inputBox input:focus ~ i{
-    height: 44px;
-} 
-.box form .links{
+    height: 38px;
+}
+.box .left_form .links{
     display: flex;
     justify-content: space-between;
 }
-.box form .links a{
+.box .left_form .links a{
     margin: 15px 0;
     font-size: 0.8em;
     color :#e0ac1c;
@@ -136,7 +213,7 @@ body{
 {
     color: #ebc355;
 }
-.box form input[type="submit"]
+.box .left_form input[type="submit"]
 {
     border: none;
     outline: none;
@@ -147,10 +224,140 @@ body{
     font-size: 0.9em;
     border-radius: 4px;
     font-weight: 600;
-    width: 100%;
-    margin-top: 15px;
+    width: 30%;
+    margin-left: 270px;
+    margin-top: 2px;
 }
-.box form input[type="submit"]:active
+.box .left_form input[type="submit"]:active
 {
     opacity: 0.8;
 }
+/* END style form ben trai */
+
+/* start style form ben phai */
+/*start  style o them anh cho bai dang  */
+.container_img{
+    max-width: 250px;
+    width: 100%;
+    position: absolute;
+    background: #222;
+    padding: 5px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+    margin-top: 15%;
+}
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: var(--grey);
+    margin-bottom: 10px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: #e0ac1c solid 3px;
+}
+.img-area .icon {
+    font-size: 70px;
+}
+.img-area h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.img-area p {
+    color: #151414;
+    font-weight: bold;
+    font-size: 14px;
+}
+.img-area p span {
+    font-weight: 600;
+}
+.img-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 100;
+}
+.img-area::before {
+    content: attr(data-img);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 200;
+}
+.img-area.active:hover::before {
+    opacity: 1;
+}
+.select-image {
+    display: block;
+    width: 65%;
+    padding: 10px 0;
+    border-radius: 15px;
+    background: #e0ac1c;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    border: #e0ac1c solid 2px;
+    cursor: pointer;
+    transition: all .3s ease;
+    text-align: center;
+
+}
+.select-image:hover {
+    background: #e7c976;
+}
+
+/* end style class them anh bai dang  */
+
+
+/* Để tạo một phần định dạng riêng cho label */
+/* style o nam sinh  */
+.namsinh {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #AAAAAA;
+}
+
+.box .left_form .inputBox input[type="date"]{
+    position : relative;
+    width: 100%;
+    padding: 20px 10px 10px;
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+    color:#e1d8d8 ;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+    z-index: 10;
+    height: 40px;
+}
+.box .left_form .inputBox  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Đảo ngược màu sắc của biểu tượng quyen lich*/
+}
+
+/* end style form ben phai */

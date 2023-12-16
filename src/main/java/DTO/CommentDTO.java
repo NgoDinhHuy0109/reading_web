@@ -3,7 +3,6 @@ import java.text.SimpleDateFormat;
 import lombok.Getter;
 import models.ArticlesEntity;
 import models.CommentsEntity;
-
 @Getter
 public class CommentDTO {
     private final CommentsEntity comment;

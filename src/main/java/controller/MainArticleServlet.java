@@ -9,22 +9,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.io.IOException;
-
 import jakarta.servlet.http.Part;
-
 import java.util.UUID;
-
 @WebServlet(name = "MainArticleServlet", urlPatterns = {"/createArticle"})
 public class MainArticleServlet extends HttpServlet {
     private final Article articleApplication = new Article(new ArticlesEntity());
     private final Category categoryApplication = new Category(new CategoriesEntity());
     CategoriesEntity categories = new CategoriesEntity();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -56,7 +51,6 @@ public class MainArticleServlet extends HttpServlet {
                         ArticlesEntity articlesEntity = new ArticlesEntity(title, titleImage, content);
                         articleApplication.createArticle(articlesEntity, category1, UUID.fromString(author));
                     }
-                    // Rest of the code...
                 }
             }
             getServletContext().getRequestDispatcher(url).forward(request, response);

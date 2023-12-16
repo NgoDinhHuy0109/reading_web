@@ -2,28 +2,21 @@ package Service;
 
 import utils.HibernateUtils;
 import org.hibernate.query.Query;
-
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import DTO.*;
-
 import java.util.Collections;
 import java.util.List;
-
 import com.google.gson.Gson;
 import models.*;
 import org.hibernate.Session;
-
 public class Article extends HibernateUtils {
     public Article() {
         super(new ArticlesEntity());
     }
-
     public Article(ArticlesEntity object) {
         super(object);
     }
-
     public void save() {
         Gson responseJson = new Gson();
         try {
@@ -32,7 +25,6 @@ public class Article extends HibernateUtils {
             System.out.println(error);
         }
     }
-
     public void createArticle(ArticlesEntity newArticle, UUID categoryId, UUID accountId) {
         try {
             UUID articleId = UUID.randomUUID();
@@ -130,10 +122,6 @@ public class Article extends HibernateUtils {
             return null;
         }
     }
-
-
-    // Add this method to execute a query and return a list of a specified type
-
     public ArticlesEntity getArticleById(UUID articleId) {
         try {
             // Retrieve the category by its ID
@@ -163,7 +151,6 @@ public class Article extends HibernateUtils {
             return Collections.emptyList();
         }
     }
-
     private List<ArticlesEntity> executeQueryWithParameter(String query, String paramName, UUID paramValue) {
         try (Session session = getSessionFactory().openSession()) {
             Query<ArticlesEntity> hqlQuery = session.createQuery(query, ArticlesEntity.class);
@@ -174,6 +161,22 @@ public class Article extends HibernateUtils {
             return Collections.emptyList(); // Return an empty list in case of an error
         }
     }
-
-
+    public long countArticles() {
+        try {
+            String query = "SELECT COUNT(*) FROM ArticlesEntity WHERE isDeleted = false";
+            return executeCountQuery(query);
+        } catch (Exception e) {
+            System.out.println("Error counting articles: " + e);
+            return 0; // Or throw an exception if you want to handle errors differently
+        }
+    }
+    private long executeCountQuery(String query) {
+        try (Session session = getSessionFactory().openSession()) {
+            Query<Long> countQuery = session.createQuery(query, Long.class);
+            return countQuery.uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error executing count query: " + e);
+            return 0; // Or throw an exception if you want to handle errors differently
+        }
+    }
 }

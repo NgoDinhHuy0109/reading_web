@@ -14,23 +14,24 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class   User extends HibernateUtils {
+public class User extends HibernateUtils {
     public User() {
         super(new UserInfoEntity());
     }
+
     public User(UserInfoEntity object) {
         super(object);
     }
-    public void save(){
+
+    public void save() {
         Gson responseJson = new Gson();
         try {
             super.saveEntity();
-        }
-        catch (Exception error)
-        {
+        } catch (Exception error) {
             System.out.println(error);
         }
     }
+
     public void createUsers(UserInfoEntity newUser, UUID accountId) {
         try {
             UUID userId = UUID.randomUUID();
@@ -47,6 +48,7 @@ public class   User extends HibernateUtils {
             System.out.println("Error creating user: " + error);
         }
     }
+
     public List<UserDTO> getUsersByAccountName(String accountName) {
         try {
             // Query the database to get the user by account name
@@ -59,6 +61,7 @@ public class   User extends HibernateUtils {
             return Collections.emptyList();
         }
     }
+
     public UserInfoEntity getUserById(UUID categoryId) {
         try {
             // Retrieve the category by its ID
@@ -68,6 +71,7 @@ public class   User extends HibernateUtils {
             return null; // Return null in case of an error
         }
     }
+
     public boolean isEmailExists(String email) {
         try {
             String query = "FROM UserInfoEntity WHERE isDeleted = false AND email = :email";
@@ -77,6 +81,7 @@ public class   User extends HibernateUtils {
             throw new RuntimeException("Error checking email existence", e);
         }
     }
+
     public boolean isPhoneNumberExists(String phoneNumber) {
         try {
             String query = "FROM UserInfoEntity WHERE isDeleted = false AND phoneNumber = :phoneNumber";
@@ -86,6 +91,7 @@ public class   User extends HibernateUtils {
             throw new RuntimeException("Error checking phone number existence", e);
         }
     }
+
     private List<UserInfoEntity> executeQueryWithParameter(String query, String paramName, String paramValue) {
         try (Session session = getSessionFactory().openSession()) {
             Query<UserInfoEntity> hqlQuery = session.createQuery(query, UserInfoEntity.class);
@@ -97,6 +103,7 @@ public class   User extends HibernateUtils {
             return Collections.emptyList();
         }
     }
+
     private List<UserDTO> formatDateTimeInUsers(List<UserInfoEntity> users) {
         return users.stream()
                 .map(UserDTO::new)
@@ -116,6 +123,7 @@ public class   User extends HibernateUtils {
             throw new RuntimeException("Error retrieving account", error);
         }
     }
+
     private List<UserInfoEntity> executeQuerysWithParameter(String query, String paramName, String paramValue) {
         try (Session session = getSessionFactory().openSession()) {
             Query<UserInfoEntity> hqlQuery = session.createQuery(query, UserInfoEntity.class);
@@ -124,6 +132,26 @@ public class   User extends HibernateUtils {
         } catch (Exception e) {
             System.out.println("Error retrieving categories: " + e);
             throw new RuntimeException("Error executing query", e);
+        }
+    }
+
+    public long countUsers() {
+        try {
+            String query = "SELECT COUNT(*) FROM UserInfoEntity WHERE isDeleted = false";
+            return executeCountQuery(query);
+        } catch (Exception e) {
+            System.out.println("Error counting users: " + e);
+            return 0; // Or throw an exception if you want to handle errors differently
+        }
+    }
+
+    private long executeCountQuery(String query) {
+        try (Session session = getSessionFactory().openSession()) {
+            Query<Long> countQuery = session.createQuery(query, Long.class);
+            return countQuery.uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error executing count query: " + e);
+            return 0; // Or throw an exception if you want to handle errors differently
         }
     }
 }

@@ -40,27 +40,21 @@ public class CategoriesEntity implements Serializable{
     public CategoriesEntity(String categoryName) { this.categoryName = categoryName; }
     @OneToMany(mappedBy = "category")
     private Collection<ArticlesEntity> listArticle;
-
     public void setCategoryId(UUID categoryId) {
         this.categoryId = categoryId;
     }
-
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }

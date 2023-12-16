@@ -1,4 +1,3 @@
-
 <%@ page import="DTO.CategoryDTO" %>
 <%@ page import="Service.Category" %>
 <%@ page import="java.util.List" %>
@@ -14,12 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="news_page/style.css">
-    <title>New Reading</title>
+    <title>News Reading</title>
     <link rel="stylesheet" href="https://unpkg.com/@xylphid/resizable/style.css"/>
     <script src="https://unpkg.com/@xylphid/resizable/index.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/draggabilly/dist/draggabilly.css"/>
     <script src="https://unpkg.com/draggabilly/dist/draggabilly.pkgd.min.js"></script>
-    <!-- Thêm thư viện Font Awesome vào trang của bạn -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -27,8 +25,7 @@
     <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
 </head>
 <body>
-<jsp:include page="/news_page/header_user.jsp"/>
-<jsp:include page="/news_page/pop_up.jsp"/>
+<jsp:include page="/news_page/header.jsp"/>
 <div class="menu_container">
     <nav>
         <ul>
@@ -47,14 +44,11 @@
         </ul>
     </nav>
 </div>
-
 <div class="fist_container">
     <%
         User userApplication = new User(); // Khởi tạo một đối tượng User
-
         // Lấy danh sách tất cả các bài báo, sắp xếp theo ngày đăng giảm dần
         List<ArticleDTO> articleDTOS = new Article().getAllArticles();
-
         // Biến đếm để phân loại bài báo
         int count = 0;
         for (ArticleDTO article : articleDTOS) {
@@ -65,7 +59,7 @@
             <%=article.getArticle().getTitleImage()%>
         </div>
         <div class="bottom">
-            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>&category_Name=<%=article.getArticle().getCategory().getCategoryName()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
+            <a href="news_page/readpage2.jsp?article_ID=<%=article.getArticle().getArticleId()%>&category_Name=<%=article.getArticle().getCategory().getCategoryName()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
             <a href="news_page/info_user_lock.jsp?username=<%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%>" rel="noreferrer" class="jsx-1509373995">
                 <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
                 <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%>
@@ -79,7 +73,7 @@
             <%=article.getArticle().getTitleImage()%>
         </div>
         <div class="bottom_2">
-            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
+            <a href="news_page/readpage2.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
             <a href="news_page/info_user_lock.jsp" rel="noreferrer" class="jsx-1509373995">
                 <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
                 <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%></span>
@@ -90,52 +84,6 @@
         count++;
     }
     %>
-</div>
-<div class="second_container">
-    <div class="second_1">
-        <div class="top_second"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168933_cover-re.jpg"
-                                     alt=""></div>
-        <div class="bottom_second">
-            <h3>Chơi Resident Evil Village trên iPhone 15 Pro Max: Vẫn chỉ có Capcom là thương Apple nhất</h3>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
-    <div class="second_1">
-        <div class="top_second"><img
-                src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8164810_Cover-dat-bike.jpg" alt=""></div>
-        <div class="bottom_second">
-            <h3>Dat Bike Quantum - bước tiến mới trong ngành công nghiệp xe điện tại Việt Nam</h3>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
-    <div class="second_1">
-        <div class="top_second"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168933_cover-re.jpg"
-                                     alt=""></div>
-        <div class="bottom_second">
-            <h3>Chơi Resident Evil Village trên iPhone 15 Pro Max: Vẫn chỉ có Capcom là thương Apple nhất</h3>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
-    <div class="second_1">
-        <div class="top_second"><img src="https://photo2.tinhte.vn/data/attachment-files/2023/10/8168933_cover-re.jpg"
-                                     alt=""></div>
-        <div class="bottom_second">
-            <h3>Chơi Resident Evil Village trên iPhone 15 Pro Max: Vẫn chỉ có Capcom là thương Apple nhất</h3>
-            <a target="_blank" href="https://tinhte.vn/profile/pw.2452461/" rel="noreferrer" class="jsx-1509373995">
-                <img src="https://photo2.tinhte.vn/data/avatars/m/2452/2452461.jpg?1653405194">
-                <span class="jsx-3594291015 author">P.W</span>
-            </a>
-        </div>
-    </div>
 </div>
 <div class="list_container">
     <%
@@ -150,7 +98,7 @@
     <div class="news_list">
         <div class="left"><%=article.getArticle().getTitleImage()%></div>
         <div class="right">
-            <a href="news_page/readpage.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
+            <a href="news_page/readpage2.jsp?article_ID=<%=article.getArticle().getArticleId()%>"><h3><%=article.getArticle().getTitle()%></h3></a>
             <a href="news_page/info_user_lock.jsp" rel="noreferrer" class="jsx-1509373995">
                 <%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getUserImage()%>
                 <span class="jsx-3594291015 author"><%=article.getArticle().getAccountsByAccountId().getUserInfoEntityId().getFullName()%></span>

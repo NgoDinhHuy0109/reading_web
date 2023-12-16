@@ -1,15 +1,22 @@
 <%@ page import="DTO.UserDTO" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@ page import="utils.Service.Category" %>
+<%@ page import="Service.*" %>
 <%@ page import="models.CategoriesEntity" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.UUID" %>
-<%@ page import="DTO.CategoryDTO" %>
+<%@ page import="DTO.*" %>
+<%
+    Category categoryService = new Category();
+    long totalCategories = categoryService.countCategories();
+    Article articleService = new Article();
+    long totalArticles = articleService.countArticles();
+    User userService = new User();
+    long totalUsers = userService.countUsers();
+%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,82 +37,10 @@
 </head>
 <body>
 <div class="container">
-    <aside>
-        <div class="toggle">
-            <div class="logo">
-                <img src="images/logo.png">
-                <a href="dashboard.jsp"><h2 class="h2_header">Admin<span class="danger">Page</span></h2>
-                </a>
-            </div>
-            <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">
-                        close
-                    </span>
-            </div>
-        </div>
-        <div class="sidebar">
-            <a href="dashboard.jsp">
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                <h3>Dashboard</h3>
-            </a>
-            <a href="javascript:void(0);" onclick="toggleCategoryLink()" id="category-link">
-                <span class="material-icons-sharp">receipt_long</span>
-                <h3>Category</h3>
-            </a>
-            <a href="article_home.jsp">
-                    <span class="material-icons-sharp">
-                        insights
-                    </span>
-                <h3>Article</h3>
-            </a>
-            <a href="user.html">
-                    <span class="material-icons-sharp">
-                        person_outline
-                    </span>
-                <h3>User</h3>
-            </a>
-            <a href="index_category.html">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                <h3>Interact</h3>
-            </a>
-            <a href="">
-                    <span class="material-icons-sharp">
-                        add
-                    </span>
-                <h3>Create New</h3>
-            </a>
-            <a href="sign_in.jsp">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                <h3>Logout</h3>
-            </a>
-        </div>
-    </aside>
-    <!-- End of Sidebar Section -->
-
-    <!-- Main Content -->
+    <jsp:include page="aside.jsp"/>
     <main>
-        <!-- .............................. -->
-        <div class="profile">
-            <% List<UserDTO> userList = (List<UserDTO>) request.getAttribute("userList"); %>
-            <% for (UserDTO user : userList) { %>
-            <div class="info">
-                <p>Hey, <b><%= user.getUserInfo().getFullName() %></b></p>
-                <small class="text-muted">Admin</small>
-            </div>
-            <% } %>
-            <div class="profile-photo">
-                <img src="images/profile-1.jpg">
-            </div>
-        </div>
-        <!-- .............................. -->
+        <jsp:include page="profile.jsp"/>
         <h1>Analytics</h1>
-
         <div class="analyse">
             <div class="sales">
                 <div class="status">
@@ -113,7 +48,7 @@
                         <a href="cate_home.jsp"><h3 class="name_left">Total Categories</h3></a>
                     </div>
                     <div class="progresss">
-                        <h3 class="name_right">20</h3>
+                        <h3 class="name_right"><%= totalCategories %></h3>
                     </div>
                 </div>
             </div>
@@ -123,7 +58,7 @@
                         <a href="article_home.jsp"><h3 class="name_left">Total Articles</h3></a>
                     </div>
                     <div class="progresss">
-                        <h3 class="name_right">20</h3>
+                        <h3 class="name_right"><%= totalArticles %></h3>
                     </div>
                 </div>
             </div>
@@ -134,7 +69,7 @@
                         <a href=""><h3 class="name_left">Total Users</h3></a>
                     </div>
                     <div class="progresss">
-                        <h3 class="name_right">20</h3>
+                        <h3 class="name_right"><%= totalUsers %></h3>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 package DTO;
 import java.text.SimpleDateFormat;
-
 import lombok.Getter;
 import models.ArticlesEntity;
 @Getter

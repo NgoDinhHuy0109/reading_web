@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="utils.Service.Category" %>
+<%@ page import="DTO.UserDTO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ page import="Service.Category" %>
 <%@ page import="models.CategoriesEntity" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
@@ -16,73 +18,21 @@
 </head>
 <body>
 <div class="container">
-    <aside>
-        <div class="toggle">
-            <div class="logo">
-                <img src="images/logo.png">
-                <h2 class="h2_header">Admin<span class="danger">Page</span></h2>
-            </div>
-            <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">
-                        close
-                    </span>
-            </div>
-        </div>
-        <div class="sidebar">
-            <a href="dashboard.jsp" >
-                    <span class="material-icons-sharp">
-                        dashboard
-                    </span>
-                <h3>Dashboard</h3>
-            </a>
-            <a href="category" >
-                    <span class="material-icons-sharp">
-                        receipt_long
-                    </span>
-                <h3>Category</h3>
-            </a>
-            <a href="article_home.jsp" >
-                    <span class="material-icons-sharp">
-                        insights
-                    </span>
-                <h3>Article</h3>
-            </a>
-            <a href="user.jsp" >
-                    <span class="material-icons-sharp">
-                        person_outline
-                    </span>
-                <h3>User</h3>
-            </a>
-            <a href="user.jsp" target="Loadpage">
-                    <span class="material-icons-sharp">
-                        inventory
-                    </span>
-                <h3>Interact</h3>
-            </a>
-            <a href="">
-                    <span class="material-icons-sharp">
-                        add
-                    </span>
-                <h3>Create New</h3>
-            </a>
-            <a href="sign_in.jsp">
-                    <span class="material-icons-sharp">
-                        logout
-                    </span>
-                <h3>Logout</h3>
-            </a>
-        </div>
-    </aside>
+    <jsp:include page="aside.jsp"/>
     <main>
-        <div class="profile">
-            <div class="info">
-                <p>Hey, <b>User</b></p>
-                <small class="text-muted">Admin</small>
-            </div>
-            <div class="profile-photo">
-                <img src="images/profile-1.jpg">
-            </div>
-        </div>
+        <%--        <div class="profile">--%>
+        <%--            <% List<UserDTO> userList = (List<UserDTO>) request.getAttribute("userList"); %>--%>
+        <%--            <% for (UserDTO user : userList) { %>--%>
+        <%--            <div class="info">--%>
+        <%--                <p>Hey, <b><%= user.getUserInfo().getFullName() %></b></p>--%>
+        <%--                <small class="text-muted">Admin</small>--%>
+        <%--            </div>--%>
+        <%--            <% } %>--%>
+        <%--            <div class="profile-photo">--%>
+        <%--                <img src="images/profile-1.jpg">--%>
+        <%--            </div>--%>
+        <%--        </div>--%>
+        <jsp:include page="profile.jsp"/>
         <h1>Category</h1>
         <div class="analyse_cate">
             <div class="btn_createnew">
@@ -112,10 +62,14 @@
                     </tr>
                     <% for (CategoryDTO category : categoriesList) { %>
                     <tr>
-                        <td><%= category.getCategory().getCategoryName() %></td>
-                        <td><%= category.getCategory().getDescription() %></td>
-                        <td><%= category.getCreatedAtString() %></td>
-                        <td><%= category.getUpdatedAtString() %></td>
+                        <td><%= category.getCategory().getCategoryName() %>
+                        </td>
+                        <td><%= category.getCategory().getDescription() %>
+                        </td>
+                        <td><%= category.getCreatedAtString() %>
+                        </td>
+                        <td><%= category.getUpdatedAtString() %>
+                        </td>
                         <td>
                             <div class="btn_table">
                                 <a href="cate_edit.jsp?categoryId=<%= category.getCategory().getCategoryId() %>">
@@ -123,7 +77,8 @@
                                 </a>
                                 <form action="category" method="post">
                                     <input type="hidden" name="action" value="delete">
-                                    <input type="hidden" name="categoryId" value="<%= category.getCategory().getCategoryId() %>">
+                                    <input type="hidden" name="categoryId"
+                                           value="<%= category.getCategory().getCategoryId() %>">
                                     <button class="button_table" type="submit" id="delete"> Delete</button>
                                 </form>
                             </div>
@@ -137,7 +92,6 @@
             </div>
         </div>
     </main>
-    <script src="orders.js"></script>
     <script src="index.js"></script>
 </div>
 </body>

@@ -1,16 +1,12 @@
 package DTO;
 import java.text.SimpleDateFormat;
-
 import lombok.Getter;
 import models.CategoriesEntity;
-
 @Getter
 public class CategoryDTO {
-
     private final CategoriesEntity category;
     private final String createdAtString;
     private final String updatedAtString;
-
     public CategoryDTO(CategoriesEntity category) {
         this.category = category;
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy H:mm:ss");

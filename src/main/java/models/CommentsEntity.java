@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.UUID;
-
 @Entity
 @Table(name = "comments",schema = "public",catalog = "reading-web")
 public class CommentsEntity implements Serializable{
@@ -42,22 +41,17 @@ public class CommentsEntity implements Serializable{
     @JoinColumn(name = "account_id", nullable = false)
     private AccountsEntity account;
     public void setCommentId(UUID commentId){this.commentId = commentId;}
-
     public void setContent(String content) {this.content = content;}
-
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
-    public CommentsEntity()
-    {}
+    public CommentsEntity() {}
     public CommentsEntity(String content){
         this.commentId =UUID.randomUUID();
         this.content = content;
@@ -77,7 +71,6 @@ public class CommentsEntity implements Serializable{
     }
     public InteractionsEntity getInteractionsByInteractionId(){return  interaction;}
     public void setInteractionsByInteractionId(InteractionsEntity interactionsByInteractionId){this.interaction = interactionsByInteractionId;}
-
     @Override
     public int hashCode() {
         return Objects.hash(commentId,content, createdAt, updatedAt, isDeleted);

@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.io.IOException;
 import jakarta.servlet.http.Part;
-
 import java.util.Objects;
 import java.util.UUID;
 @WebServlet(name = "ArticleServlet", urlPatterns = {"/article"})
@@ -71,8 +70,6 @@ public class ArticleServlet extends HttpServlet{
                     ArticlesEntity articlesEntity = new ArticlesEntity(title,titleImage,content);
                     articleApplication.createArticle(articlesEntity, category, UUID.fromString(author));
                 }
-                //UUID author = UUID.fromString("f024f779-1839-45ba-acf1-9f9948cee82c");
-
             }
             if(action.equals("edit")){
                 // Retrieve the parameters from the request
@@ -82,7 +79,6 @@ public class ArticleServlet extends HttpServlet{
                 String categoryName = request.getParameter("categoryName");
                 String newContent = request.getParameter("editorContent");
                 UUID articleId = UUID.fromString(articleIdParam);
-                // Retrieve the existing article
                 ArticlesEntity existingArticle = articleApplication.getArticleById(articleId);
                 if (existingArticle != null) {
                     // Retrieve the category by name

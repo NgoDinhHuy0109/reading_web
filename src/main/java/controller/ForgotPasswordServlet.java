@@ -42,9 +42,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                 otp = cookieUtils.getOTPSentToUserFromCookieOrStorage(request);
                 sendMailToUser(email, otp);
                 url = "/nhap_otp.jsp";
-
             }
-
         } catch (Exception e) {
             // Handle exceptions more gracefully, redirect to an error page
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
@@ -52,45 +50,37 @@ public class ForgotPasswordServlet extends HttpServlet {
         getServletContext().getRequestDispatcher(url).forward(request, response);
         return;
     }
-
     static final String fromEmail = "trongvumaimtv@gmail.com";// Email người gửi
     static final String password = "klfnasnzxuvnkddy";
     private Properties prop;
     private Session session;
-
     public void sendMailToUser(String email, String otp){
         prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
-
         // Creating a new session with an authenticator
         session = Session.getInstance(prop, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(fromEmail, password);
             }
         });
-
         try {
             // Create a default MimeMessage object
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail)); // Use your actual sender's email address here
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email)); // 'email' is the recipient's email address
             message.setSubject("Account Creation Successful for " + email);
-
             // Create the content of the email
             String content = "Dear,\n\n" +
                     "Here is your otp.\n\n" + otp +
                     "Best Regards,\n" +
                     "TS Tech\n";
-
             message.setText(content);
             // Send message
             Transport.send(message);
-
             System.out.println("Sent message successfully....");
-
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -100,7 +90,5 @@ public class ForgotPasswordServlet extends HttpServlet {
                          HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
-
     }
-
 }

@@ -659,6 +659,18 @@ main .recent-orders a{
         position: relative;
         margin-top: 1.8rem;
     }
+    main .profile{
+        position: fixed;
+        top: 1.4rem; /* Điều chỉnh khoảng cách từ đỉnh trình duyệt */
+        right: 65px; /* Điều chỉnh khoảng cách từ cạnh phải của trình duyệt */
+        width: 81vw;
+        background: #f6f6f9;
+        display: flex;
+        gap: 2rem;
+        text-align: right;
+        justify-content: flex-end;
+
+    }
 
     main .analyse{
         grid-template-columns: 5fr;

@@ -1,12 +1,10 @@
 package models;
 import jakarta.persistence.*;
 import lombok.Getter;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 import java.util.UUID;
-
 @Entity
 @Table(name = "emotions", schema = "public", catalog = "reading-web")
 public class EmotionsEntity implements Serializable  {
@@ -34,19 +32,14 @@ public class EmotionsEntity implements Serializable  {
     @OneToOne
     @JoinColumn(name = "interaction_id", nullable = false)
     private InteractionsEntity interaction;
-
     public void setEmotionId(UUID emotionId){this.emotionId = emotionId;}
-
     public void setType(Boolean type){this.type = type;}
-
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
@@ -67,7 +60,6 @@ public class EmotionsEntity implements Serializable  {
     }
     public InteractionsEntity getInteractionsByInteractionId(){return  interaction;}
     public void setInteractionsByInteractionId(InteractionsEntity interactionsByInteractionId){this.interaction = interactionsByInteractionId;}
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -81,10 +73,8 @@ public class EmotionsEntity implements Serializable  {
         if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) return false;
         if (isDeleted != null ? !isDeleted.equals(that.isDeleted) : that.isDeleted != null) return false;
 //        if (categoryId != null ? !categoryId.equals(that.categoryId) : that.categoryId != null) return false;
-
         return true;
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(emotionId,type, createdAt, updatedAt, isDeleted);

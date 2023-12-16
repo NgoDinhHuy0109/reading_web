@@ -86,9 +86,9 @@
                     <% } %>
                 </table>
             </div>
-                <% } else { %>
-                <p>No articles available.</p>
-                <% } %>
+            <% } else { %>
+            <p>No articles available.</p>
+            <% } %>
         </div>
     </main>
     <script src="script_article.js"></script>

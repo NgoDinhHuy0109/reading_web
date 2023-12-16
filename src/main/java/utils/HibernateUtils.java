@@ -5,10 +5,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import models.*;
+
 import java.util.UUID;
+
 public class HibernateUtils {
     private static final SessionFactory sessionFactory;
     protected Object object = null;
+
     static {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
@@ -19,9 +22,11 @@ public class HibernateUtils {
             throw new ExceptionInInitializerError(ex);
         }
     }
+
     public HibernateUtils(Object object) {
         this.object = object;
     }
+
     public void saveEntity() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
@@ -32,6 +37,7 @@ public class HibernateUtils {
         session.getTransaction().commit();
         session.close();
     }
+
     public <T> T getEntityById(Class<T> entityType, UUID pk) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
@@ -50,6 +56,7 @@ public class HibernateUtils {
         }
         return entity;
     }
+
     public void updateEntity(Object entity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = null;
@@ -66,6 +73,7 @@ public class HibernateUtils {
             session.close();
         }
     }
+
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }

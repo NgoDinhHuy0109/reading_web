@@ -2,7 +2,6 @@ package models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
-
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -10,7 +9,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
-
 @Entity
 @Table(name = "userinfos", schema = "public", catalog = "backend-servlet")
 public class UserInfoEntity implements Serializable{
@@ -63,43 +61,33 @@ public class UserInfoEntity implements Serializable{
         this.phoneNumber = phoneNumber;
         this.userImage = userImage;
     }
-
     public void setUserInfoId(UUID userInfoId) {
         this.userInfoId = userInfoId;
     }
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
     public void setDateofBirth(Date dateofBirth) {
         this.dateofBirth = dateofBirth;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
     public void setUserImage(String userImage) {
         this.userImage = userImage;
     }
-
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public Boolean getDeleted() {
         return isDeleted;
     }
-
     public void setDeleted(Boolean deleted) {
         isDeleted = deleted;
     }
@@ -128,9 +116,7 @@ public class UserInfoEntity implements Serializable{
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-
         UserInfoEntity that = (UserInfoEntity) object;
-
         if (!Objects.equals(userInfoId, that.userInfoId)) return false;
         if (fullName != null ? !fullName.equals(that.fullName) : that.fullName != null) return false;
         if (dateofBirth != null ? !dateofBirth.equals(that.dateofBirth) : that.dateofBirth != null) return false;
@@ -139,14 +125,12 @@ public class UserInfoEntity implements Serializable{
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
         if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) return false;
         if (isDeleted != null ? !isDeleted.equals(that.isDeleted) : that.isDeleted != null) return false;
-
         return true;
     }
     @Override
     public int hashCode() {
         return Objects.hash(userInfoId,fullName,dateofBirth,email,phoneNumber, createdAt, updatedAt, isDeleted);
     }
-
     @Override
     public String toString() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy H:mm:ss");
@@ -161,7 +145,6 @@ public class UserInfoEntity implements Serializable{
                 ", isDeleted='" + isDeleted + '\'' +
                 '}';
     }
-
     public void setAccountsEntity(AccountsEntity accountsEntity) {
         this.accountsEntity = accountsEntity;
     }

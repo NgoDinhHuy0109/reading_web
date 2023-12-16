@@ -1,10 +1,7 @@
 package DTO;
-
 import lombok.Getter;
 import models.AccountsEntity;
-
 import java.text.SimpleDateFormat;
-
 @Getter
 public class AccountDTO {
     private final AccountsEntity accounts;

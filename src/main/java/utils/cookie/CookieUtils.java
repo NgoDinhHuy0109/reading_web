@@ -42,6 +42,7 @@ public class CookieUtils {
         }
         return userCookieValue;
     }
+
     public Boolean setOTP(HttpServletResponse httpServletResponse, HttpServletRequest request) {
         String otp = generateOTP(); // Hàm generateOTP() tạo mã OTP
 
@@ -53,6 +54,7 @@ public class CookieUtils {
         //check if cookie is saved
         return getOTPSentToUserFromCookieOrStorage(request) != null;
     }
+
     public String getOTPSentToUserFromCookieOrStorage(HttpServletRequest request) {
         // Lấy mã OTP từ Cookie (nếu sử dụng Cookie để lưu trữ)
         Cookie[] cookies = request.getCookies();
@@ -66,13 +68,11 @@ public class CookieUtils {
         return null;
     }
 
-    public void deleteCookie(String ele,  HttpServletResponse response) {
+    public void deleteCookie(String ele, HttpServletResponse response) {
         // Create a new cookie with the same name as the cookie to be deleted
         Cookie deleteCookie = new Cookie(ele, "");
-
         // Set its max age to 0 to delete the cookie
         deleteCookie.setMaxAge(0);
-
         // Add the cookie to the response
         response.addCookie(deleteCookie);
     }

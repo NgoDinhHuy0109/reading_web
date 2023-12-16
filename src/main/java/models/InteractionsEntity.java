@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.UUID;
-
 @Entity
 @Table(name = "interactions", schema = "public", catalog = "reading-web")
 public class InteractionsEntity implements Serializable{
@@ -28,12 +27,10 @@ public class InteractionsEntity implements Serializable{
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private AccountsEntity acount;
-
     @OneToOne(mappedBy = "interaction")
     private EmotionsEntity emotion;
     @OneToOne(mappedBy = "interaction")
     private CommentsEntity comment;
-
     public InteractionsEntity(){}
     public InteractionsEntity(Long createdAt, Long updatedAt, Boolean isDeleted){
         this.createdAt = createdAt;
@@ -46,10 +43,8 @@ public class InteractionsEntity implements Serializable{
     public void setAccountsByAccountId(AccountsEntity accountsByAccountId){this.acount= accountsByAccountId;}
     public EmotionsEntity getEmotionsByEmotionId(){return emotion;}
     public void setEmotionsByEmotionId(EmotionsEntity emotionsByEmotionId){this.emotion = emotionsByEmotionId;}
-
     public CommentsEntity getCommentsByCommentId(){return comment;}
     public void setCommentsByCommentId(CommentsEntity commentsByCommentId){this.comment = commentsByCommentId;}
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -61,7 +56,6 @@ public class InteractionsEntity implements Serializable{
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
         if (updatedAt != null ? !updatedAt.equals(that.updatedAt) : that.updatedAt != null) return false;
         if (isDeleted != null ? !isDeleted.equals(that.isDeleted) : that.isDeleted != null) return false;
-
         return true;
     }
     @Override
@@ -78,5 +72,4 @@ public class InteractionsEntity implements Serializable{
                 ", isDeleted='" + isDeleted + '\'' +
                 '}';
     }
-
 }

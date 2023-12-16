@@ -1,9 +1,7 @@
 package models;
-
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.io.Serializable;
 import java.util.UUID;
 @Entity
@@ -29,32 +27,23 @@ public class RequestsEntity implements Serializable {
     @OneToOne
     @JoinColumn(name = "account_id", nullable = false)
     private AccountsEntity accountRequest;
-
     public void setRequestId(UUID requestId) {
         this.requestId = requestId;
     }
-
     public Boolean getAccepted() {
         return isAccepted;
     }
-
     public void setAccepted(Boolean accepted) {
         isAccepted = accepted;
     }
-
     public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
-
     public void setUpdatedAt(Long updatedAt) {
         this.updatedAt = updatedAt;
     }
-
     public void setAccountRequest(AccountsEntity accountRequest) {
         this.accountRequest = accountRequest;
     }
-
-    public RequestsEntity() {
-
-    }
+    public RequestsEntity() {}
 }

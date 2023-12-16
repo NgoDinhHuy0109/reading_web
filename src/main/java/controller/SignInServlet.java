@@ -27,7 +27,6 @@ public class SignInServlet extends HttpServlet {
     private final Account accountApplication = new Account(new AccountsEntity());
     private final User userApplication = new User(new UserInfoEntity());
     AccountsEntity accounts = new AccountsEntity();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
@@ -68,12 +67,9 @@ public class SignInServlet extends HttpServlet {
                                 request.setAttribute("error", "Can not get");
                                 getServletContext().getRequestDispatcher(url).forward(request, response);
                                 return;
-
                             }
                             String jSessionId = session.getId();
-
                             List<UserDTO> userList = userApplication.getUsersByAccountName(userName);
-
                             session.setAttribute("JSESSIONID", jSessionId);
                             for (UserDTO user : userList)
                             {
@@ -89,7 +85,6 @@ public class SignInServlet extends HttpServlet {
                                 session.setAttribute("UserInformation", userList);
                                 url = "/news_page/index_user.jsp";
                             }
-
                         } else {
                             url = "/sign_in_error.jsp";
                             request.setAttribute("error", "Wrong Username or password");
@@ -111,7 +106,6 @@ public class SignInServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/error_notification.jsp?error=" + e.getMessage());
         }
     }
-
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)

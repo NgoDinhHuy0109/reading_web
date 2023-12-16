@@ -24,7 +24,7 @@
             </div>
 
             <div class="links">
-                <a href="#">Forgot Password</a>
+                <a href="nhap_email.jsp">Forgot Password</a>
                 <a href="sign_up.jsp">Sign Up</a>
             </div>
             <input type="submit" id="signin" value="Login">
